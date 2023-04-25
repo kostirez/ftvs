@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 const LOCAL_URL = "http://localhost:1337/api/";
 
@@ -11,11 +12,24 @@ export class StrapiService {
 
   constructor(private http: HttpClient) { }
 
-  public get<T>(endpoint: string, params: {}): Observable<T> {
+  public getOne<T>(endpoint: string, params: {}, id: number): Observable<T> {
     return this.http
-      .get<T>(this.getUrl(endpoint), {
+      .get<{data: StrapiObj<T>}>(this.getUrl(endpoint, id), {
         params,
-      });
+      }).pipe(
+        map(obj => (obj.data)),
+        map(data => ({...data.attributes}) as T)
+      )
+  }
+
+  public getMany<T>(endpoint: string, params: {}): Observable<T[]> {
+    return this.http
+      .get<{data: StrapiObj<T>[]}>(this.getUrl(endpoint), {
+        params,
+      }).pipe(
+        map(obj => obj.data),
+        map(data => data.map(item => item.attributes as T))
+      )
   }
 
 
@@ -26,16 +40,25 @@ export class StrapiService {
         });
   }
 
-  public put<T>(endpoint: string, data: T, id: string): Observable<T> {
+  public put(endpoint: string, data: {}, id: number): Observable<{}> {
     return this.http
-      .put<T>(this.getUrl(endpoint, id), {
+      .put(this.getUrl(endpoint, id), {
         data
       });
   }
 
-  private getUrl(endpoint: string, id: string = ""): string {
+  private getUrl(endpoint: string, id?: number): string {
     endpoint += id ? `/${id}` : "";
     return LOCAL_URL + endpoint;
   }
 
+}
+
+export interface StrapiObj<T> {
+  id: number;
+  attributes: {
+    "createdAt": Date,
+    "updatedAt": Date,
+    "publishedAt": Date,
+  } & T;
 }

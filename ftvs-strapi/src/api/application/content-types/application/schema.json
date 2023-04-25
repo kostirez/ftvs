@@ -4,7 +4,8 @@
   "info": {
     "singularName": "application",
     "pluralName": "applications",
-    "displayName": "application"
+    "displayName": "application",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -27,6 +28,9 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "applications"
+    },
+    "submitDate": {
+      "type": "date"
     }
   }
 }
