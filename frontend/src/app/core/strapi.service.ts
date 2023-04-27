@@ -40,6 +40,11 @@ export class StrapiService {
         });
   }
 
+  public postNoData<T>(endpoint: string, data: {}): Observable<T> {
+    return this.http
+      .post<T>(this.getUrl(endpoint), data);
+  }
+
   public put(endpoint: string, data: {}, id: number): Observable<{}> {
     return this.http
       .put(this.getUrl(endpoint, id), {
