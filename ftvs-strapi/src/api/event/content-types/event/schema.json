@@ -19,9 +19,9 @@
     "description": {
       "type": "richtext"
     },
-    "imgs": {
+    "img": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",

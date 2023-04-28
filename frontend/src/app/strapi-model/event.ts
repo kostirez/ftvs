@@ -1,9 +1,11 @@
 import { StrapiRelations } from "../core/strapi-relations";
+import { Img } from "./img";
 
 export interface Event {
+  id: number;
   name: string;
   description: string;
-  imgs: {}[];
+  img: Img;
   applications: number[];
   organizers: number[];
 }
@@ -11,7 +13,7 @@ export interface Event {
 export interface EventWithRelations {
   name: string;
   description: string;
-  imgs: {}[];
+  imgs: Img;
   applications: StrapiRelations;
   organizers: StrapiRelations;
 }

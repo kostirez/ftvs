@@ -1,6 +1,7 @@
 import { StrapiRelations } from "../core/strapi-relations";
 
 export interface Application {
+  id: number;
   approved: boolean;
   eventId: number;
   userId: number;
