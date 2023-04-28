@@ -17,7 +17,7 @@ export class EventService {
   }
 
   getMany(): Observable<Event[]> {
-    return this.strapi.getMany<Event>(ENDPOINT, {});
+    return this.strapi.getMany<Event>(ENDPOINT, { populate: "*" })
   }
 
 }

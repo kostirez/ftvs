@@ -1,1 +1,6 @@
-<p>event works!</p>
+
+<div *ngIf="$event | async as event">
+  <h2 class="text-center">{{event.name}}</h2>
+  <p class="text-center">{{event.description}}</p>
+
+</div>

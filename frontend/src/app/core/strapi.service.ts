@@ -29,7 +29,7 @@ export class StrapiService {
         params,
       }).pipe(
         map(obj => obj.data),
-        map(data => data.map(item => item.attributes as T)),
+        map(data => data.map(item => this.unwrapStrapiObj(item))),
         map(array => array.map(tObj => this.unwrapAllStrapiObjProperties<T>(tObj))),
       )
   }

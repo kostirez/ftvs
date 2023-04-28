@@ -8,6 +8,7 @@ export interface Event {
   img: Img;
   applications: number[];
   organizers: number[];
+  price: string;
 }
 
 export interface EventWithRelations {

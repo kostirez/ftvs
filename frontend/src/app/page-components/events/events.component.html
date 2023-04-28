@@ -1,1 +1,21 @@
-<p>events works!</p>
+
+<h1 class="text-center m-5">Nase akce</h1>
+<div class="card-group ">
+  <div
+    class="card mw-25 m-3 border border-primary"
+    *ngFor="let event of events"
+    (click)="navigateToEvent(event.id)">
+
+    <img [src]="getImg(event)" class="card-img-top img-fluid img-thumbnail" alt="...">
+    <div class="card-body">
+      <h3 class="card-title">{{event.name}}</h3>
+
+      <p class="card-text overflow-hidden card-description">{{event.description}}</p>
+      <p class="card-text"><small class="text-muted">{{event.organizers}}</small></p>
+      <div>
+        <h5 class="float-start">price</h5>
+        <button class="btn btn-primary float-end">Prihlasit se</button>
+      </div>
+    </div>
+  </div>
+</div>
