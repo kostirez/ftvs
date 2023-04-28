@@ -18,8 +18,9 @@ export class StrapiService {
         params,
       }).pipe(
         map(obj => (obj.data)),
-        map(data => ({...data.attributes}) as T)
-      )
+        map(data => (this.unwrapStrapiObj(data))),
+        map(tObj => this.unwrapAllStrapiObjProperties(tObj)),
+      );
   }
 
   public getMany<T>(endpoint: string, params: {}): Observable<T[]> {
@@ -28,7 +29,8 @@ export class StrapiService {
         params,
       }).pipe(
         map(obj => obj.data),
-        map(data => data.map(item => item.attributes as T))
+        map(data => data.map(item => item.attributes as T)),
+        map(array => array.map(tObj => this.unwrapAllStrapiObjProperties<T>(tObj))),
       )
   }
 
@@ -57,6 +59,27 @@ export class StrapiService {
     return LOCAL_URL + endpoint;
   }
 
+  private unwrapAllStrapiObjProperties<T>(obj: any): T {
+    let ret: RandomObj = {};
+    for (const [key, value] of Object.entries(obj)) {
+      const val = value as RandomObj;
+      if (value && val.data) {
+        if(Array.isArray(val.data)) {
+          ret[key] = val.data.map(item => this.unwrapStrapiObj(item));
+        } else {
+          ret[key] = this.unwrapStrapiObj(val.data)
+        }
+      } else {
+        ret[key] = value;
+      }
+    }
+    return ret as T;
+  }
+
+  private unwrapStrapiObj<T>(obj: StrapiObj<T>): T {
+    return {id: obj.id, ...obj.attributes} as T;
+  }
+
 }
 
 export interface StrapiObj<T> {
@@ -67,3 +90,10 @@ export interface StrapiObj<T> {
     "publishedAt": Date,
   } & T;
 }
+
+interface RandomObj {
+  [key: string]: any;
+}
+
+
+
