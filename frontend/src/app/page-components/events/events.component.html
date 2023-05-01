@@ -1,6 +1,7 @@
 
 <h1 class="text-center m-5">Nase akce</h1>
-<div class="card-group ">
+<div *ngIf="$nearEvents | async as events"
+     class="card-group">
   <div
     class="card mw-25 m-3 border border-primary"
     *ngFor="let event of events"

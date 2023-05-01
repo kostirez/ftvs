@@ -3,6 +3,7 @@ import { EventService } from "../../strapi-services/event.service";
 import { Event } from "../../strapi-model/event";
 import { ImageService } from "../../core/image.service";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 
 
 
@@ -13,17 +14,14 @@ import { Router } from "@angular/router";
 })
 export class EventsComponent implements OnInit {
 
-  public events: Event[] = [];
+  public $nearEvents: Observable<Event[]>;
 
   constructor(
     private eventService: EventService,
     private imageService: ImageService,
     private router: Router,
   ) {
-    this.eventService.getMany()
-      .subscribe(items => {
-        this.events = items;
-      })
+    this.$nearEvents = this.eventService.getMany();
   }
 
   ngOnInit(): void {

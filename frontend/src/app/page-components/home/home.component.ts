@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from "rxjs";
+
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+
+  public $about: Observable<string>
+
+  constructor(
+  ) {
+    this.$about = of("o nas blablablablablablablabla");
+  }
 
   ngOnInit(): void {
   }
