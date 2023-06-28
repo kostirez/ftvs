@@ -6,6 +6,7 @@ export interface User {
   blocked: boolean;
   createdAt: Date;
   updatedAt: Date;
+  id: string;
 }
 
 export interface AuthUser {

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from "./strapi-services/auth.service";
+import { User } from "./strapi-model/user";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,20 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'frontend';
 
+  user: User | null = null;
+
   navbarOpen = false;
+
+  constructor(private authService: AuthService) {
+    this.authService.user.subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  logOff() {
+    this.authService.logoff();
+  }
+
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

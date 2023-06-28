@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="login-container bg-secondary">
+  <ul class="nav nav-tabs nav-fill">
+    <li (click)="activateTab('login')"
+        class="nav-item">
+    <span class="nav-link"
+          [class.active]="tab.tabType === 'login'">Prihlasit se</span>
+    </li>
+    <li (click)="activateTab('registration')"
+        class="nav-item">
+    <span class="nav-link"
+          [class.active]="tab.tabType === 'registration'">
+      Registrovat se</span>
+    </li>
+  </ul>
+
+  <div class="p-2">
+    <div *ngIf="tab.tabType==='login'">
+      <p>prihlaseni</p>
+      <input type="text" [(ngModel)]="email" placeholder="email" />
+      <input type="password" [(ngModel)]="password" placeholder="password" />
+      <button (click)="logIn()">prihlasit</button>
+    </div>
+
+    <div *ngIf="tab.tabType==='registration'">
+      <p>vytvoreni noveho uctu</p>
+      <input type="text" [(ngModel)]="username" placeholder="username" />
+      <input type="text" [(ngModel)]="email" placeholder="email" />
+      <input type="password" [(ngModel)]="password" placeholder="password" />
+      <button (click)="createAccount()">Create account</button>
+    </div>
+  </div>
+</div>

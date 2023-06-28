@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { UserService } from "./user.service";
 import { User } from "../strapi-model/user";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private currentUser: User | null;
+  private currentUserSubject$: Subject<User> = new Subject<User>();
+  private currentUser$: Observable<User> = this.currentUserSubject$.asObservable();
 
   private jwtToken: string | null;
 
@@ -18,12 +20,12 @@ export class AuthService {
   }
 
   public get user() {
-    return this.currentUser;
+    return this.currentUser$;
   }
 
   constructor(private userService: UserService) {
-    this.currentUser = null;
     this.jwtToken = null;
+    this.currentUser$.subscribe(user => console.log("user", user));
   }
 
   loginIn(identifier: string, password: string): void {
@@ -32,7 +34,7 @@ export class AuthService {
     }
     this.userService.userLogin(identifier, password)
       .subscribe(authUser => {
-        this.currentUser = authUser.user;
+        this.currentUserSubject$.next(authUser.user);
         this.jwtToken = authUser.jwt;
       })
   }
@@ -47,13 +49,13 @@ export class AuthService {
     }
     this.userService.createUser(username, email, password)
       .subscribe(authUser => {
-        this.currentUser = authUser.user;
+        this.currentUserSubject$.next(authUser.user);
         this.jwtToken = authUser.jwt;
       })
   }
 
   public logoff() {
-    this.currentUser = null;
+    this.currentUserSubject$.next(undefined);
     this.jwtToken = null;
     // redirect to login page
   }
