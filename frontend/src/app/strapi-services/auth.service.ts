@@ -11,6 +11,8 @@ export class AuthService {
   private currentUserSubject$: Subject<User> = new Subject<User>();
   private currentUser$: Observable<User> = this.currentUserSubject$.asObservable();
 
+  private currentUser: User | null;
+
   private jwtToken: string | null;
 
   private authenticated = false
@@ -19,13 +21,20 @@ export class AuthService {
     return this.jwtToken;
   }
 
-  public get user() {
+  public get user$(): Observable<User> {
     return this.currentUser$;
   }
 
+  public get CurrentUser(): User | null {
+    return this.currentUser;
+  }
+
   constructor(private userService: UserService) {
+    this.currentUser = null;
     this.jwtToken = null;
-    this.currentUser$.subscribe(user => console.log("user", user));
+    this.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   loginIn(identifier: string, password: string): void {

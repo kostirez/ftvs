@@ -1,1 +1,25 @@
-<p>user works!</p>
+<div *ngIf="user" class="user-container  bg-secondary">
+  <div>
+    <h2>osobni udaje</h2>
+    <div >
+      <p>username: {{user.username}}</p>
+      <p>email: {{user.email}}</p>
+    </div>
+  </div>
+  <div>
+    <h2>prihlasky na akce</h2>
+    <div *ngIf="userApplications.length>0">
+      <div class="m-4 bg-primary" *ngFor="let application of userApplications">
+        <p>event id: {{application.id}}</p>
+        <p>submit date: {{application.submitDate}}</p>
+        <p>approve: {{application.approved}}</p>
+      </div>
+    </div>
+    <div *ngIf="userApplications.length===0">
+      <p>nejste prihlasen na zadnou akci</p>
+    </div>
+  </div>
+</div>
+<div  class="user-container  bg-secondary text-center" *ngIf="!user">
+  <h3 class="mt-5">nejste prihlaseny</h3>
+</div>

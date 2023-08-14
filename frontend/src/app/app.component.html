@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="home">
+    <a class="navbar-brand" routerLink="/home">
       MIA
     </a>
 
@@ -14,16 +14,16 @@
     <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen }">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link"  routerLink="#">Uvod</a>
+          <a class="nav-link"  routerLink="/">Uvod</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  routerLink="events">Akce</a>
+          <a class="nav-link"  routerLink="/events">Akce</a>
         </li>
         <li class="nav-item" *ngIf="!user">
-          <a class="nav-link"  routerLink="login">login</a>
+          <a class="nav-link"  routerLink="/login">login</a>
         </li>
         <li class="nav-item" *ngIf="user">
-          <a class="nav-link" [routerLink]="'user/' + user.id">{{user.username}}</a>
+          <a class="nav-link" [routerLink]="'/user/' + user.id">{{user.username}}</a>
         </li>
         <li class="nav-item" *ngIf="user">
           <a class="nav-link" (click)="logOff()"  routerLink="login/">odhlasit se</a>

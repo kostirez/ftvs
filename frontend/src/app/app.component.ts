@@ -15,7 +15,7 @@ export class AppComponent {
   navbarOpen = false;
 
   constructor(private authService: AuthService) {
-    this.authService.user.subscribe(user => {
+    this.authService.user$.subscribe(user => {
       this.user = user;
     });
   }

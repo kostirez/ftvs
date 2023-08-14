@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../../strapi-services/auth.service";
+import { User } from "../../strapi-model/user";
+import { Application } from "../../strapi-model/application";
+import { ApplicationService } from "../../strapi-services/application.service";
 
 @Component({
   selector: 'app-user',
@@ -7,9 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  public user: User | null = null;
+
+  userApplications: Application[] = [];
+
+  constructor(private authService: AuthService,
+              private applicationService: ApplicationService) {
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+      this.applicationService.getUserApplications(this.user.id)
+        .subscribe(applications => this.userApplications = applications);
+    });
+  }
 
   ngOnInit(): void {
+    this.user = this.authService.CurrentUser;
   }
 
 }
