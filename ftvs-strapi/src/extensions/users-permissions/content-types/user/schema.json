@@ -66,17 +66,15 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "applications": {
+    "public_user": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::application.application",
+      "relation": "oneToOne",
+      "target": "api::public-user.public-user",
       "mappedBy": "user"
     },
-    "events": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::event.event",
-      "mappedBy": "organizers"
+    "publicUserId": {
+      "type": "string",
+      "unique": false
     }
   }
 }

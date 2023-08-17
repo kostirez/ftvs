@@ -7,9 +7,14 @@ export interface User {
   createdAt: Date;
   updatedAt: Date;
   id: string;
+  publicUserId: string
 }
 
 export interface AuthUser {
   jwt: string;
   user: User;
+}
+
+export interface PublicUser {
+
 }

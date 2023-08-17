@@ -2,5 +2,5 @@
 <div *ngIf="$event | async as event">
   <h2 class="text-center">{{event.name}}</h2>
   <p class="text-center">{{event.description}}</p>
-
+  <p class="text-center">pocet prihlasek{{event.applications.length}}</p>
 </div>

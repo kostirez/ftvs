@@ -23,14 +23,14 @@
       "target": "api::event.event",
       "inversedBy": "applications"
     },
+    "submitDate": {
+      "type": "date"
+    },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
+      "target": "api::public-user.public-user",
       "inversedBy": "applications"
-    },
-    "submitDate": {
-      "type": "date"
     }
   }
 }

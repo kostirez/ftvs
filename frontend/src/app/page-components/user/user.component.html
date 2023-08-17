@@ -7,16 +7,26 @@
     </div>
   </div>
   <div>
-    <h2>prihlasky na akce</h2>
-    <div *ngIf="userApplications.length>0">
-      <div class="m-4 bg-primary" *ngFor="let application of userApplications">
+    <div *ngIf="organizedEvents$ | async as events">
+      <h2>Akce, ktere organizuji</h2>
+      <div class="m-4 bg-primary" *ngFor="let event of events">
+        <p>event name: {{event.name}}</p>
+        <p>price: {{event.price}}</p>
+      </div>
+      <div *ngIf="events.length===0">
+        <p>neporadate zadnou akci</p>
+      </div>
+    </div>
+    <div *ngIf="applications$ | async as applications">
+      <h2>prihlasky na Akce</h2>
+      <div class="m-4 bg-primary" *ngFor="let application of applications">
         <p>event id: {{application.id}}</p>
         <p>submit date: {{application.submitDate}}</p>
         <p>approve: {{application.approved}}</p>
       </div>
-    </div>
-    <div *ngIf="userApplications.length===0">
-      <p>nejste prihlasen na zadnou akci</p>
+      <div *ngIf="applications.length===0">
+        <p>nejste prihlasen na zadnou akci</p>
+      </div>
     </div>
   </div>
 </div>

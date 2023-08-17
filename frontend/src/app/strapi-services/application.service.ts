@@ -35,5 +35,12 @@ export class ApplicationService {
   getUserApplications(userId: string): Observable<Application[]> {
     return this.strapi.getMany<Application>(ENDPOINT, { populate: "*" })
   }
+
+  getApplicationsForUserId(id: string) : Observable<Application[]> {
+    return this.strapi.getMany<Application>("applications",
+      {
+        "filters[user][id][$eq]": id,
+        populate: "*" })
+  }
 }
 

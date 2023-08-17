@@ -36,14 +36,14 @@
       "target": "api::application.application",
       "mappedBy": "event"
     },
+    "price": {
+      "type": "string"
+    },
     "organizers": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "events"
-    },
-    "price": {
-      "type": "string"
+      "target": "api::public-user.public-user",
+      "mappedBy": "events"
     }
   }
 }
