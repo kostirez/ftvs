@@ -18,10 +18,6 @@ export class GalleryComponent implements OnInit {
     private imageService: ImageService,
   ) {
     this.photos$ = this.photoService.getMany();
-
-    this.photos$.subscribe(p => {
-      console.log("p", p);
-    })
   }
 
   public getImg(photo: Photo): string {

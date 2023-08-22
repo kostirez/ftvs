@@ -20,4 +20,11 @@ export class PhotoService {
   getMany(): Observable<Photo[]> {
     return this.strapi.getMany<Photo>(ENDPOINT, {populate: "*"})
   }
+
+  getPhotosForEventId(id: number) : Observable<Photo[]> {
+    return this.strapi.getMany<Photo>("photos",
+      {
+        "filters[event][id][$eq]": id,
+        populate: "*" })
+  }
 }

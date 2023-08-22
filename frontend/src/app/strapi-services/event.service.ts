@@ -14,7 +14,7 @@ export class EventService {
   constructor(private strapi: StrapiService) { }
 
   getOne(id: number): Observable<Event> {
-    return this.strapi.getOne<Event>(ENDPOINT, { populate: ["organizers", "applications"] }, id);
+    return this.strapi.getOne<Event>(ENDPOINT, { populate: ["organizers", "applications", "img"] }, id);
   }
 
   getMany(): Observable<Event[]> {
@@ -28,7 +28,7 @@ export class EventService {
         populate: ['user']})
   }
 
-  getEventsByOrganizer(publicUserId: string): Observable<Event[]> {
+  getEventsByOrganizer(publicUserId: number): Observable<Event[]> {
     return this.strapi.getMany<Event>("events",
       {
         "filters[organizers][id][$eq]": publicUserId,

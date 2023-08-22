@@ -19,7 +19,7 @@ export class ApplicationService {
       {
         approved: application.approved,
         event: createRelation("connect", [application.eventId]),
-        userId: createRelation("connect", [application.userId]),
+        user: createRelation("connect", [application.userId]),
         submitDate: application.submitDate,
       })
   }
@@ -32,11 +32,11 @@ export class ApplicationService {
     );
   }
 
-  getUserApplications(userId: string): Observable<Application[]> {
+  getUserApplications(userId: number): Observable<Application[]> {
     return this.strapi.getMany<Application>(ENDPOINT, { populate: "*" })
   }
 
-  getApplicationsForUserId(id: string) : Observable<Application[]> {
+  getApplicationsForUserId(id: number) : Observable<Application[]> {
     return this.strapi.getMany<Application>("applications",
       {
         "filters[user][id][$eq]": id,

@@ -1,6 +1,38 @@
 
-<div *ngIf="$event | async as event">
-  <h2 class="text-center">{{event.name}}</h2>
-  <p class="text-center">{{event.description}}</p>
-  <p class="text-center">pocet prihlasek{{event.applications.length}}</p>
+  <div *ngIf="$event | async as event">
+    <div *ngIf="applicationStep===0">
+    <h2 class="text-center">{{event.name}}</h2>
+    <p class="text-center">{{event.description}}</p>
+    <p class="text-center">pocet prihlasek{{event.applications.length}}</p>
+    <p class="text-center">cena: {{event.price}}</p>
+
+    <div>
+      <h3>Galerie</h3>
+      <div *ngIf="photos$ | async as photos">
+        <div class="d-flex align-content-start flex-wrap">
+          <div class="event-pic m-3" *ngFor="let photo of photos">
+            <img class="img-thumbnail" [src]="getImg(photo)" alt="image">
+            <p class="text-center">{{photo.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="startRegistration()">prihlasit</button>
+    </div>
+  </div>
+  <div *ngIf="applicationStep===1">
+    <h1>{{event.name}}</h1>
+    <p>opravdu se chcete prihlasit</p>
+    <p>cena: {{event.price}}</p>
+    <button class="btn btn-primary" (click)="registerForEvent(event)">zavazne prihlasit</button>
+  </div>
+  <div *ngIf="applicationStep===2">
+    <p>prihlasovani...</p>
+  </div>
+  <div *ngIf="applicationStep===3">
+    <h1>uspesne jste se prihlasili na akci {{event.name}}</h1>
+    <h3>prosime uhradte castku {{event.price}} na ucet xxx</h3>
+    <button class="btn btn-primary" (click)="goBackToEventDetail()">zpet na detail akce</button>
+  </div>
 </div>

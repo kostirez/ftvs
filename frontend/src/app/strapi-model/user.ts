@@ -8,8 +8,8 @@ export interface User {
   blocked: boolean;
   createdAt: Date;
   updatedAt: Date;
-  id: string;
-  publicUserId: string
+  id: number;
+  publicUserId: number;
 }
 
 export interface AuthUser {
