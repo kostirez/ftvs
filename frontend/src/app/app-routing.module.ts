@@ -5,10 +5,12 @@ import { LoginComponent } from "./page-components/login/login.component";
 import { UserComponent } from "./page-components/user/user.component";
 import { EventComponent } from "./page-components/event/event.component";
 import { EventsComponent } from "./page-components/events/events.component";
+import { AboutComponent } from "./page-components/about/about.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'about', component: AboutComponent },
   { path: 'events', component: EventsComponent },
   { path: 'user/:id', component: UserComponent },
   { path: 'event/:id', component: EventComponent },

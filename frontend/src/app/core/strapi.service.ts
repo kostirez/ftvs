@@ -54,6 +54,17 @@ export class StrapiService {
       });
   }
 
+  public getSingleType<T>(endpoint: string, params: {}): Observable<T> {
+    return this.http
+      .get<{data: StrapiObj<T>}>(this.getUrl(endpoint), {
+        params,
+      }).pipe(
+        map(obj => (obj.data)),
+        map(data => (this.unwrapStrapiObj(data))),
+        map(tObj => this.unwrapAllStrapiObjProperties(tObj)),
+      );
+  }
+
   private getUrl(endpoint: string, id?: number): string {
     endpoint += id ? `/${id}` : "";
     return LOCAL_URL + endpoint;

@@ -10,6 +10,7 @@ import { LoginComponent } from './page-components/login/login.component';
 import { UserComponent } from './page-components/user/user.component';
 import { EventComponent } from './page-components/event/event.component';
 import { EventsComponent } from './page-components/events/events.component';
+import { AboutComponent } from './page-components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EventsComponent } from './page-components/events/events.component';
     LoginComponent,
     UserComponent,
     EventComponent,
-    EventsComponent
+    EventsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

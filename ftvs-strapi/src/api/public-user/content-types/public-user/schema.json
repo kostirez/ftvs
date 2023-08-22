@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "public_users",
+  "info": {
+    "singularName": "public-user",
+    "pluralName": "public-users",
+    "displayName": "public-user",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "public_user"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "inversedBy": "organizers"
+    },
+    "applications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::application.application",
+      "mappedBy": "user"
+    },
+    "description": {
+      "type": "text"
+    },
+    "organizer": {
+      "type": "boolean"
+    },
+    "mail": {
+      "type": "email"
+    },
+    "avatar": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { Img } from "./img";
+
 export interface User {
   username: string;
   email: string;
@@ -16,5 +18,9 @@ export interface AuthUser {
 }
 
 export interface PublicUser {
-
+  id: number;
+  name: string;
+  description: string;
+  mail: string;
+  avatar: Img;
 }
