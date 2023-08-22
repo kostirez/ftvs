@@ -33,4 +33,9 @@ export interface ImgFormat {
   url: string;
 }
 
+export interface Photo {
+  description: string;
+  img: Img;
+}
+
 export type ImgFormatType = "thumbnail";

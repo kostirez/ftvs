@@ -11,6 +11,7 @@ import { UserComponent } from './page-components/user/user.component';
 import { EventComponent } from './page-components/event/event.component';
 import { EventsComponent } from './page-components/events/events.component';
 import { AboutComponent } from './page-components/about/about.component';
+import { GalleryComponent } from './page-components/gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AboutComponent } from './page-components/about/about.component';
     UserComponent,
     EventComponent,
     EventsComponent,
-    AboutComponent
+    AboutComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+<div>
+  <h1 class="text-center">Galerie</h1>
+  <div *ngIf="photos$ | async as photos">
+    <div class="d-flex align-content-start flex-wrap">
+      <div class="photo-box m-3" *ngFor="let photo of photos">
+        <img class=" img-thumbnail" [src]="getImg(photo)" alt="image">
+        <p class="text-center">{{photo.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

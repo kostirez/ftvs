@@ -44,6 +44,12 @@
       "relation": "manyToMany",
       "target": "api::public-user.public-user",
       "mappedBy": "events"
+    },
+    "photos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::photo.photo",
+      "mappedBy": "event"
     }
   }
 }
