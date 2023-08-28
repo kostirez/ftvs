@@ -3,8 +3,6 @@ import { AboutPageData, AboutService } from "../../strapi-services/about.service
 import { Observable } from "rxjs";
 import { UserService } from "../../strapi-services/user.service";
 import { PublicUser } from "../../strapi-model/user";
-import { mergeMap, tap } from "rxjs/operators";
-import { Event } from "../../strapi-model/event";
 import { ImageService } from "../../core/image.service";
 
 @Component({
@@ -23,21 +21,6 @@ export class AboutComponent implements OnInit {
 
   ) {
     this.data$ = this.aboutService.getAbout()
-
-    // this.a$ = this.aboutService.getAbout()
-    //   .pipe(
-    //     mergeMap(d => this.getUserAvatar(d.people[0])),
-    //     tap(a => console.log("merge map", a))
-    //   )
-    // this.a$.subscribe(a=> console.log("a", a));
-    this.data$.subscribe(d => {
-      console.log("d", d);
-    });
-  }
-
-  public getUserAvatar(user: PublicUser): Observable<string> {
-    console.log("get user", user.id)
-    return this.userService.getPublicUserPic(user);
   }
 
   public getImg(user: PublicUser): string {

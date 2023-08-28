@@ -1,5 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from "rxjs";
+import { EventService } from "../../strapi-services/event.service";
+import { ImageService } from "../../core/image.service";
+
+interface HomeItem {
+  headline: string;
+  btnText: string;
+  link: string;
+  pic: string;
+}
+
+const HOME_ITEMS: HomeItem[] = [
+  {
+    headline: "Nase akce",
+    btnText: "vsechny akce",
+    link: "/events",
+    pic: "./assets/akce_mia.jpeg",
+  },
+  {
+    headline: "Kdo jsem",
+    btnText: "vice info",
+    link: "/about",
+    pic: "./assets/akce_mia.jpeg",
+  },
+  {
+    headline: "Fotky",
+    btnText: "galerie",
+    link: "/gallery",
+    pic: "./assets/akce_mia.jpeg",
+  },
+]
 
 
 @Component({
@@ -9,12 +38,12 @@ import { Observable, of } from "rxjs";
 })
 export class HomeComponent implements OnInit {
 
-
-  public $about: Observable<string>
+  items = HOME_ITEMS;
 
   constructor(
+    private eventService: EventService,
+    private imageService: ImageService,
   ) {
-    this.$about = of("o nas blablablablablablablabla");
   }
 
   ngOnInit(): void {

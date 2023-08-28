@@ -1,20 +1,19 @@
-<div class="home-item text-center">
-  <h1>MIA logo</h1>
-  <h3>Studentsky spolek Univerzity Karlovy</h3>
+<div class="text-center">
+  <img class="mw-100" src="/assets/logo.png" alt="image">
+  <h3>Jsme univerzitní studentský spolek Univerzity Karlovy.</h3>
   <button type="button" class="btn btn-secondary btn-lg">
     <a class="nav-link" routerLink="/login">Pridej se k nam</a>
   </button>
 </div>
-<div class="home-item text-center">
-<!--  <h2> Nadchazejici akce</h2>-->
-  <app-events></app-events>
-  <button type="button" class="btn btn-secondary btn-lg">
-    <a class="nav-link" routerLink="/events">Zobrazit vsechny akce</a>
-  </button>
-</div>
-<div class="home-item text-center ">
-  <h2> O nas</h2>
-  <button type="button" class="btn btn-secondary btn-lg">
-    <a class="nav-link" routerLink="/about">vsichi nasi clenove</a>
-  </button>
+<div class="container-md container-fluid my-5">
+  <div class="row">
+    <section class="col-md-4 home-item"
+    *ngFor="let item of items">
+      <h3>{{item.headline}}</h3>
+      <img [src]="item.pic" alt="image">
+      <button type="button" class="btn btn-secondary btn-lg">
+        <a class="nav-link" [routerLink]="item.link">{{item.btnText}}</a>
+      </button>
+    </section>
+  </div>
 </div>
