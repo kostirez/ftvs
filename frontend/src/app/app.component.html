@@ -39,6 +39,41 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container-md container-fluid">
   <router-outlet></router-outlet>
 </div>
+
+<footer class="bg-light text-white">
+  <div class="container-md container-fluid">
+    <div class="row">
+      <section class="col-md-4 overflow-hidden">
+        <img class="w-100 my-2    " src="/assets/logo.png" alt="image">
+      </section>
+
+      <section class="col-md-4 my-2 text-center">
+        <h1>Kontakt</h1>
+        <div class="my-1">adresa</div>
+        <div class="my-1">mail</div>
+        <div class="my-1">telefon</div>
+      </section>
+
+      <section class="col-md-4 my-2 text-center">
+        <h4>sledujte nas na</h4>
+        <!-- Facebook -->
+        <a class="btn text-white btn-floating m-1 social-icon">
+          <i class="bi bi-facebook fb"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a class="btn text-white btn-floating m-1 social-icon">
+          <i class="bi--md bi-instagram ig"></i>
+        </a>
+
+      </section>
+    </div>
+  </div>
+  <div class="text-center p-3 bg-dark">
+    © 2023 Copyright:
+    <a class="text-white nav-link">Martin Kostohryz</a>
+  </div>
+</footer>
