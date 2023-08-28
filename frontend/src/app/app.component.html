@@ -14,22 +14,22 @@
     <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen }">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link"  routerLink="/">Uvod</a>
+          <a class="nav-link" (click)="toggleNavbar()" routerLink="/">Uvod</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  routerLink="/events">Akce</a>
+          <a class="nav-link" (click)="toggleNavbar()" routerLink="/events">Akce</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about">o nas</a>
+          <a class="nav-link" (click)="toggleNavbar()" routerLink="/about">o nas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/gallery">galerie</a>
+          <a class="nav-link" (click)="toggleNavbar()" routerLink="/gallery">galerie</a>
         </li>
         <li class="nav-item" *ngIf="!user">
-          <a class="nav-link"  routerLink="/login">login</a>
+          <a class="nav-link" (click)="toggleNavbar()" routerLink="/login">login</a>
         </li>
         <li class="nav-item" *ngIf="user">
-          <a class="nav-link" [routerLink]="'/user/' + user.id">{{user.username}}</a>
+          <a class="nav-link" (click)="toggleNavbar()" [routerLink]="'/user/' + user.id">{{user.username}}</a>
         </li>
         <li class="nav-item" *ngIf="user">
           <a class="nav-link" (click)="logOff()"  routerLink="login/">odhlasit se</a>

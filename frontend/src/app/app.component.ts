@@ -22,6 +22,7 @@ export class AppComponent {
 
   logOff() {
     this.authService.logoff();
+    this.toggleNavbar();
   }
 
 
