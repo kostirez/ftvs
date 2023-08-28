@@ -1,11 +1,11 @@
 
 <div *ngIf="data$ | async as data">
   <h1 class="text-center mt-5">O nas</h1>
-  <p class="text-center mt-5">data {{data.main}}</p>
+  <p class="text-center mt-5">{{data.main}}</p>
 
   <h1 class="text-center mt-5">kdo to vede</h1>
-  <div class="card-group d-flex flex-row mt-5">
-    <div class="user-card " *ngFor="let user of data.people">
+  <div class="card-group d-flex flex-row my-5">
+    <div class="user-card mx-auto" *ngFor="let user of data.people">
         <img class="card-img-top m-2" [src]="getImg(user)" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title text-center mt-2">{{user.name}}</h5>
