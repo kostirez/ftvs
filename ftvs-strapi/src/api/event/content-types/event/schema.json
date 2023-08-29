@@ -50,6 +50,12 @@
       "relation": "oneToMany",
       "target": "api::photo.photo",
       "mappedBy": "event"
+    },
+    "startDate": {
+      "type": "datetime"
+    },
+    "endDate": {
+      "type": "datetime"
     }
   }
 }

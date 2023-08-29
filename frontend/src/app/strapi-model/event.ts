@@ -9,6 +9,8 @@ export interface Event {
   applications: number[];
   organizers: number[];
   price: string;
+  startDate: Date;
+  endDate: Date;
 }
 
 export interface EventWithRelations {

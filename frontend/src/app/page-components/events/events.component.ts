@@ -5,7 +5,10 @@ import { ImageService } from "../../core/image.service";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
-
+const CATEGORIES = [
+  "nadchazejici",
+  "Probehle",
+]
 
 @Component({
   selector: 'app-events',
@@ -15,6 +18,10 @@ import { Observable } from "rxjs";
 export class EventsComponent implements OnInit {
 
   public $nearEvents: Observable<Event[]>;
+
+  public categories = CATEGORIES;
+
+  public currentCategory = CATEGORIES[0];
 
   constructor(
     private eventService: EventService,
@@ -37,5 +44,9 @@ export class EventsComponent implements OnInit {
 
   public navigateToEvent(id: number) {
     this.router.navigate(['/event', "" + id]);
+  }
+
+  selectCategory(category: string) {
+    this.currentCategory = category;
   }
 }

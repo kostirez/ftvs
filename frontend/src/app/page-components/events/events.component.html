@@ -1,21 +1,32 @@
 
 <h1 class="text-center m-5">Nase akce</h1>
+<div class="container">
+  <div class="row">
+    <div class="col text-center"
+         role="button"
+         (click)="selectCategory(category)"
+         *ngFor="let category of categories">
+      <h4>{{category}}</h4>
+      <div class="under-line"
+           [ngClass]="category===currentCategory ? 'selected' :''"></div>
+    </div>
+  </div>
+</div>
 <div *ngIf="$nearEvents | async as events"
-     class="card-group">
-  <div
-    class="card mw-25 m-3 border border-primary"
-    *ngFor="let event of events"
-    (click)="navigateToEvent(event.id)">
-
-    <img [src]="getImg(event)" class="card-img-top img-fluid img-thumbnail" alt="...">
-    <div class="card-body">
-      <h3 class="card-title">{{event.name}}</h3>
-
-      <p class="card-text overflow-hidden card-description">{{event.description}}</p>
-      <p class="card-text"><small class="text-muted">{{event.organizers}}</small></p>
-      <div>
-        <h5 class="float-start">price</h5>
-        <button class="btn btn-primary float-end">Prihlasit se</button>
+     class="container-md container-fluid my-5 ">
+  <div class="row gx-5 gy-5">
+    <div class="col-md-4"
+         *ngFor="let event of events">
+      <div class="border border-primary border-3 rounded-3"
+           (click)="navigateToEvent(event.id)"
+           role="button">
+        <img [src]="getImg(event)" class="w-100 img-fluid img-thumbnail mb-3" alt="...">
+        <h4 class="mb-3 mx-3">{{event.name}}</h4>
+        <div class="mb-3 mx-3">
+          <h6 class="col p-0">{{event.startDate | date}}</h6>
+          <h6 class="col">{{event.endDate | date}}</h6>
+        </div>
+        <h5 class="mb-3 mx-3">{{event.price}}</h5>
       </div>
     </div>
   </div>
