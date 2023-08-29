@@ -1,38 +1,61 @@
 
-  <div *ngIf="$event | async as event">
-    <div *ngIf="applicationStep===0">
-    <h2 class="text-center">{{event.name}}</h2>
-    <p class="text-center">{{event.description}}</p>
-    <p class="text-center">pocet prihlasek{{event.applications.length}}</p>
-    <p class="text-center">cena: {{event.price}}</p>
-
-    <div>
-      <h3>Galerie</h3>
-      <div *ngIf="photos$ | async as photos">
-        <div class="d-flex align-content-start flex-wrap">
-          <div class="event-pic m-3" *ngFor="let photo of photos">
-            <img class="img-thumbnail" [src]="getImg(photo)" alt="image">
-            <p class="text-center">{{photo.description}}</p>
+<div *ngIf="$event | async as event">
+  <div *ngIf="applicationStep===0">
+    <div class="container">
+      <section class="row mt-5">
+        <img class="col-md-6" [src]="getImg(event)" alt="event image">
+        <div class="col-md-6 pt-5 pt-md-0 px-md-5">
+          <h2>{{event.name}}</h2>
+          <p>{{event.description}}</p>
+        </div>
+      </section>
+      <section class="row mt-3 mt-md-5">
+        <div class="col-md-6 d-flex flex-column align-items-center align-items-md-start">
+          <h4>{{event.startDate | date}} - {{event.endDate | date}}</h4>
+          <h6 class="mt-3">Pocet prihlasenych: {{event.applications.length}}</h6>
+        </div>
+        <div class="col-md-6 d-flex flex-column align-items-center align-items-md-end">
+          <h3 class="mt-3 mt-md-0">{{event.price}}</h3>
+          <button class="mt-3 w-50 btn btn-primary btn-lg"
+                  (click)="startRegistration()">
+            prihlasit
+          </button>
+        </div>
+      </section>
+      <section class="row mt-5">
+        <h3>Galerie</h3>
+        <div *ngIf="photos$ | async as photos">
+          <div class="d-flex align-content-start flex-wrap">
+            <div class="event-pic m-3" *ngFor="let photo of photos">
+              <img class="img-thumbnail" [src]="getImg(photo)" alt="image">
+              <p class="text-center">{{photo.description}}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div>
-      <button class="btn btn-primary" (click)="startRegistration()">prihlasit</button>
+      </section>
     </div>
   </div>
-  <div *ngIf="applicationStep===1">
+
+<!--  summary -->
+  <div class="d-flex flex-column align-items-center gap-3 my-5"
+       *ngIf="applicationStep===1">
     <h1>{{event.name}}</h1>
-    <p>opravdu se chcete prihlasit</p>
+    <h5>{{event.startDate | date}} - {{event.endDate | date}}</h5>
+    <h5>opravdu se chcete prihlasit</h5>
     <p>cena: {{event.price}}</p>
-    <button class="btn btn-primary" (click)="registerForEvent(event)">zavazne prihlasit</button>
+    <button class="btn btn-primary btn-lg" (click)="registerForEvent(event)">zavazne prihlasit</button>
+    <button class="btn btn-secondary" (click)="goBackToEventDetail()">zpet na detail akce</button>
   </div>
-  <div *ngIf="applicationStep===2">
-    <p>prihlasovani...</p>
+<!--  loading -->
+  <div class="text-center my-5"
+       *ngIf="applicationStep===2">
+    <h4>prihlasovani...</h4>
   </div>
-  <div *ngIf="applicationStep===3">
+<!--  finalization -->
+  <div class="d-flex flex-column align-items-center gap-3 my-5"
+       *ngIf="applicationStep===3">
     <h1>uspesne jste se prihlasili na akci {{event.name}}</h1>
     <h3>prosime uhradte castku {{event.price}} na ucet xxx</h3>
-    <button class="btn btn-primary" (click)="goBackToEventDetail()">zpet na detail akce</button>
+    <button class="btn btn-secondary" (click)="goBackToEventDetail()">zpet na detail akce</button>
   </div>
 </div>
