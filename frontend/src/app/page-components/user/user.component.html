@@ -1,35 +1,63 @@
-<div *ngIf="user" class="user-container  bg-secondary">
-  <div>
-    <h2>osobni udaje</h2>
-    <div >
-      <p>username: {{user.username}}</p>
-      <p>email: {{user.email}}</p>
-    </div>
-  </div>
-  <div>
-    <div *ngIf="organizedEvents$ | async as events">
-      <h2>Akce, ktere organizuji</h2>
-      <div class="m-4 bg-primary" *ngFor="let event of events">
-        <p>event name: {{event.name}}</p>
-        <p>price: {{event.price}}</p>
+<div *ngIf="user && publicUser$ | async as publicUser">
+  <div class="container">
+    <section class="row mt-5">
+      <div *ngIf="getImg(publicUser)" class="col-md-6">
+        <img class="mw-100" [src]="getImg(publicUser)" alt="user image">
       </div>
-      <div *ngIf="events.length===0">
-        <p>neporadate zadnou akci</p>
+      <div class="col-md pt-5 pt-md-0 px-md-5 text-center text-md-left">
+        <h4 class="mb-3">{{publicUser.name}}</h4>
+        <h6 class="mb-3">{{publicUser.mail}}</h6>
+        <p *ngIf="publicUser.description">{{publicUser.description}}</p>
       </div>
-    </div>
-    <div *ngIf="applications$ | async as applications">
-      <h2>prihlasky na Akce</h2>
-      <div class="m-4 bg-primary" *ngFor="let application of applications">
-        <p>event id: {{application.id}}</p>
-        <p>submit date: {{application.submitDate}}</p>
-        <p>approve: {{application.approved}}</p>
+    </section>
+    <section class="row mt-3 mt-md-5">
+      <ng-container *ngIf="organizedEvents$ | async as events">
+        <div class="col-md"
+             *ngIf="events.length > 0">
+          <h2 class="text-center">Akce, ktere organizuji</h2>
+          <div class="d-flex flex-wrap align-items-center">
+            <div class="event-box border-primary"
+                 role="button"
+                 *ngFor="let event of events"
+                 (click)="goToEvent(event.id)">
+              <h3>{{event.name}}</h3>
+              <h5>{{event.startDate | date}} - {{event.endDate | date}}</h5>
+              <h5 *ngIf="event.applications">pocet prihlasenych: {{event.applications.length}}</h5>
+              <p>cena: {{event.price}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="col-md" *ngIf="applicationCards$ | async as cards">
+        <h2 class="text-center">prihlasky na Akce</h2>
+        <div class="d-flex flex-wrap align-items-center">
+          <div class="event-box border-primary"
+               role="button"
+               *ngFor="let card of cards"
+               (click)="goToEvent(card.id)">
+            <h3>{{card.name}}</h3>
+            <h6>{{card.start | date}} - {{card.end | date}}</h6>
+            <h5>Zaplaceno: {{card.paid ? "ano" : "ne"}}</h5>
+            <p>Cena: {{card.price}}</p>
+          </div>
+          <div class="event-box border-primary"
+               role="button"
+               (click)="goToEvents()">
+            <p *ngIf="cards.length===0">Nejste prihlasen na zadnou akci</p>
+            <h2 class="mt-3">Prihlasit se na dalsi akci</h2>
+          </div>
+        </div>
       </div>
-      <div *ngIf="applications.length===0">
-        <p>nejste prihlasen na zadnou akci</p>
+    </section>
+    <section class="row my-5">
+      <div class="col">
+        <button class="btn btn-secondary setting-btn" (click)="changePassword()">zmenit heslo</button>
+        <button class="btn btn-secondary setting-btn" (click)="deleteAccount()">zrusit ucet</button>
       </div>
-    </div>
+    </section>
   </div>
 </div>
-<div  class="user-container  bg-secondary text-center" *ngIf="!user">
+<div class="user-container  bg-secondary text-center" *ngIf="!user">
   <h3 class="mt-5">nejste prihlaseny</h3>
+  <button class="mt-5 btn btn-primary" (click)="goToLogin()">prihlasit se</button>
 </div>

@@ -47,5 +47,9 @@ export class UserService {
         map(u => u.avatar.url)
       )
   }
+
+  public getPublicUser(id: number): Observable<PublicUser> {
+    return this.strapi.getOne<PublicUser>("public-users", { populate: "avatar"}, id)
+  }
 }
 

@@ -6,3 +6,18 @@
   border: solid;
   padding: 10px;
 }
+
+.event-box {
+  width: 15rem;
+  min-height: 12rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  border: solid 3px;
+  border-radius: 3px;
+}
+
+.setting-btn {
+  width: fit-content;
+  display: block;
+  margin: 1rem auto;
+}
