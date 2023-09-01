@@ -1,32 +1,48 @@
-<div class="login-container bg-secondary">
-  <ul class="nav nav-tabs nav-fill">
-    <li (click)="activateTab('login')"
-        class="nav-item">
-    <span class="nav-link"
-          [class.active]="tab.tabType === 'login'">Prihlasit se</span>
-    </li>
-    <li (click)="activateTab('registration')"
-        class="nav-item">
-    <span class="nav-link"
-          [class.active]="tab.tabType === 'registration'">
-      Registrovat se</span>
-    </li>
-  </ul>
+<div class="login-container bg-light">
 
-  <div class="p-2">
-    <div *ngIf="tab.tabType==='login'">
-      <p>prihlaseni</p>
-      <input type="text" [(ngModel)]="email" placeholder="email" />
-      <input type="password" [(ngModel)]="password" placeholder="password" />
-      <button (click)="logIn()">prihlasit</button>
+  <section class="container">
+    <div class="row">
+      <div (click)="activateTab('login')"
+           role="button"
+           class="col p-2 text-center text-primary"
+           [ngClass]="tab.tabType === 'login' ? 'bg-light text-white': 'bg-secondary'">
+        <span class="">Prihlasit se</span>
+      </div>
+      <div (click)="activateTab('registration')"
+           role="button"
+           class="col p-2 text-center text-primary"
+           [ngClass]="tab.tabType === 'registration' ? 'bg-light text-white': 'bg-secondary'">
+        <span class="">Registrovat se</span>
+      </div>
     </div>
+  </section>
 
-    <div *ngIf="tab.tabType==='registration'">
-      <p>vytvoreni noveho uctu</p>
-      <input type="text" [(ngModel)]="username" placeholder="username" />
-      <input type="text" [(ngModel)]="email" placeholder="email" />
-      <input type="password" [(ngModel)]="password" placeholder="password" />
-      <button (click)="createAccount()">Create account</button>
-    </div>
-  </div>
+  <section class="d-flex  flex-column p-5"
+           *ngIf="tab.tabType==='login'">
+    <input class="mb-2 p-2 text-primary" type="text" [(ngModel)]="email" placeholder="email"/>
+    <input class="mb-2 p-2 text-primary" type="password" [(ngModel)]="password" placeholder="password"/>
+    <p class="text-danger">{{error}}</p>
+    <button class="btn btn-secondary btn-lg text-primary my-2 w-50 mx-auto"
+            (click)="logIn()">
+      prihlasit
+    </button>
+  </section>
+
+  <section class="d-flex  flex-column p-5"
+           *ngIf="tab.tabType==='registration'">
+    <input class="mb-2 p-2 text-primary"
+           type="text" [(ngModel)]="username"
+           placeholder="username"/>
+    <input class="mb-2 p-2 text-primary"
+           type="text" [(ngModel)]="email"
+           placeholder="email"/>
+    <input class="mb-2 p-2 text-primary"
+           type="password" [(ngModel)]="password"
+           placeholder="password"/>
+    <p class="text-danger">{{error}}</p>
+    <button class="btn btn-secondary btn-lg text-primary my-2 w-50 mx-auto"
+            (click)="createAccount()">
+      zaregistrovat
+    </button>
+  </section>
 </div>

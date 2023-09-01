@@ -39,12 +39,6 @@
     "price": {
       "type": "string"
     },
-    "organizers": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::public-user.public-user",
-      "mappedBy": "events"
-    },
     "photos": {
       "type": "relation",
       "relation": "oneToMany",
@@ -56,6 +50,12 @@
     },
     "endDate": {
       "type": "datetime"
+    },
+    "organizers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "events"
     }
   }
 }

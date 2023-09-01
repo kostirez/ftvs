@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { AuthUser, PublicUser } from "../strapi-model/user";
+import { AuthUser, User } from "../strapi-model/user";
 import { StrapiService } from "../core/strapi.service";
-import { ImageService } from "../core/image.service";
 import { map, tap } from "rxjs/operators";
 
-
+const ENDPOINT_USER = "users"
 const ENDPOINT_REGISTER = "auth/local/register";
 const ENDPOINT_LOCAL = "auth/local";
 
@@ -16,8 +15,8 @@ export class UserService {
 
   constructor(
     private strapi: StrapiService,
-    private imageService: ImageService
-  ) { }
+  ) {
+  }
 
   public createUser(
     username: string,
@@ -40,16 +39,12 @@ export class UserService {
       });
   }
 
-  public getPublicUserPic(user: PublicUser): Observable<string> {
-    return this.strapi.getOne<PublicUser>("public-users", { populate: "avatar"}, user.id)
+  public getUserPic(user: User): Observable<string> {
+    return this.strapi.getOne<User>(ENDPOINT_USER, {populate: "avatar"}, user.id)
       .pipe(
         tap(u => console.log("u", u)),
         map(u => u.avatar.url)
       )
-  }
-
-  public getPublicUser(id: number): Observable<PublicUser> {
-    return this.strapi.getOne<PublicUser>("public-users", { populate: "avatar"}, id)
   }
 }
 

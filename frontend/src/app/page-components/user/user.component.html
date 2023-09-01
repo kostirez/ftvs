@@ -1,13 +1,13 @@
-<div *ngIf="user && publicUser$ | async as publicUser">
+<div *ngIf="user">
   <div class="container">
     <section class="row mt-5">
-      <div *ngIf="getImg(publicUser)" class="col-md-6">
-        <img class="mw-100" [src]="getImg(publicUser)" alt="user image">
+      <div *ngIf="getImg(user)" class="col-md-6">
+        <img class="mw-100" [src]="getImg(user)" alt="user image">
       </div>
       <div class="col-md pt-5 pt-md-0 px-md-5 text-center text-md-left">
-        <h4 class="mb-3">{{publicUser.name}}</h4>
-        <h6 class="mb-3">{{publicUser.mail}}</h6>
-        <p *ngIf="publicUser.description">{{publicUser.description}}</p>
+        <h4 class="mb-3">{{user.username}}</h4>
+        <h6 class="mb-3">{{user.email}}</h6>
+        <p *ngIf="user.description">{{user.description}}</p>
       </div>
     </section>
     <section class="row mt-3 mt-md-5">

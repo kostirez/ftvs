@@ -6,11 +6,11 @@
   <h1 class="text-center mt-5">kdo to vede</h1>
   <div class="card-group d-flex flex-row my-5">
     <div class="user-card mx-auto" *ngFor="let user of data.people">
-        <img class="card-img-top m-2" [src]="getImg(user)" alt="Card image cap">
+        <img class="card-img-top m-2" [src]="getImg(user)" alt="user image">
       <div class="card-body">
-        <h5 class="card-title text-center mt-2">{{user.name}}</h5>
+        <h5 class="card-title text-center mt-2">{{user.username}}</h5>
         <p class="card-text text-center mt-2">{{user.description}}</p>
-        <p class="card-text text-center mt-2">{{user.mail}}</p>
+        <p class="card-text text-center mt-2">{{user.email}}</p>
       </div>
     </div>
   </div>

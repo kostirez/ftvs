@@ -29,38 +29,78 @@ export class AuthService {
     return this._currentUser;
   }
 
+  public get userId(): number | null {
+    if (this._currentUser) {
+      return this._currentUser.id
+    } else {
+      return null;
+    }
+  }
+
   constructor(private userService: UserService) {
     this._currentUser = null;
     this.jwtToken = null;
-    this.currentUser$.subscribe(user => {
-      this._currentUser = user;
+    this.currentUser$
+      .subscribe(user => {
+        this._currentUser = user;
     });
   }
 
-  loginIn(identifier: string, password: string): void {
+  loginIn(identifier: string, password: string): Promise<number> {
     if (this.authenticated && this.jwt) {
-      return;
+      return Promise.reject();
     }
+
+    let promiseResolve: (value: (number | PromiseLike<number>)) => void;
+    let promiseReject: (value: (number | PromiseLike<number>)) => void;
+
+    const promise = new Promise<number>((resolve, reject) => {
+      promiseResolve = resolve;
+      promiseReject = reject
+    });
+
     this.userService.userLogin(identifier, password)
-      .subscribe(authUser => {
+      .toPromise()
+      .then(authUser => {
         this.currentUserSubject$.next(authUser.user);
         this.jwtToken = authUser.jwt;
+        promiseResolve(authUser.user.id);
       })
+      .catch(e => {
+        promiseReject(e.error);
+      });
+    return promise;
   }
 
   createAccount(
     username: string,
     email: string,
     password: string,
-  ): void {
+  ): Promise<number> {
     if (this.authenticated || this.jwtToken) {
       this.logoff();
+      return Promise.reject();
     }
+
+    let promiseResolve: (value: (number | PromiseLike<number>)) => void;
+    let promiseReject: (value: (number | PromiseLike<number>)) => void;
+
+    const promise = new Promise<number>((resolve, reject) => {
+      promiseResolve = resolve;
+      promiseReject = reject
+    });
+
     this.userService.createUser(username, email, password)
-      .subscribe(authUser => {
+      .toPromise()
+      .then(authUser => {
         this.currentUserSubject$.next(authUser.user);
         this.jwtToken = authUser.jwt;
+        promiseResolve(authUser.user.id);
       })
+      .catch(e => {
+        promiseReject(e.error.error);
+    });
+    return promise;
   }
 
   public logoff() {

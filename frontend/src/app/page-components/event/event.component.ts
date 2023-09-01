@@ -74,7 +74,7 @@ export class EventComponent implements OnInit, OnDestroy {
       const application: Application = {
         approved: false,
         eventId: event.id,
-        userId: user.publicUserId,
+        userId: user.id,
         submitDate: new Date,
       }
       this.applicationService.add(application).toPromise()

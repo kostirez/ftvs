@@ -29,7 +29,7 @@
     "user": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::public-user.public-user",
+      "target": "plugin::users-permissions.user",
       "inversedBy": "applications"
     }
   }

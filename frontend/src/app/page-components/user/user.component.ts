@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../strapi-services/auth.service";
-import { PublicUser, User } from "../../strapi-model/user";
+import { User } from "../../strapi-model/user";
 import { ApplicationService } from "../../strapi-services/application.service";
 import { EventService } from "../../strapi-services/event.service";
 import { Observable } from "rxjs";
@@ -28,7 +28,6 @@ export class UserComponent implements OnInit {
 
   public user: User | null = null;
 
-  publicUser$: Observable<PublicUser> | null = null;
   organizedEvents$: Observable<Event[]> | null = null;
   applicationCards$: Observable<userApplicationCard[]> | null = null;
 
@@ -41,9 +40,8 @@ export class UserComponent implements OnInit {
     this.user = this.authService.currentUser;
 
     if (this.user) {
-      this.publicUser$ = this.userService.getPublicUser(this.user.publicUserId);
-      this.organizedEvents$ = this.eventService.getEventsByOrganizer(this.user.publicUserId)
-      this.applicationCards$ = this.applicationService.getApplicationCardsForUserId(this.user.publicUserId)
+      this.organizedEvents$ = this.eventService.getMyEvents();
+      this.applicationCards$ = this.applicationService.getApplicationCardsForUserId(this.user.id);
     }
   }
 
@@ -51,7 +49,7 @@ export class UserComponent implements OnInit {
     return this.eventService.getOne(id);
   }
 
-  public getImg(user: PublicUser): string {
+  public getImg(user: User): string {
     if (user.avatar) {
       return "url" in user.avatar ?
         this.imageService.getImgUrl(user.avatar.url) : "";

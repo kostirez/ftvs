@@ -66,15 +66,34 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "public_user": {
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "events": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::public-user.public-user",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "inversedBy": "organizers"
+    },
+    "applications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::application.application",
       "mappedBy": "user"
     },
-    "publicUserId": {
-      "type": "string",
-      "unique": false
+    "description": {
+      "type": "text"
+    },
+    "organizer": {
+      "type": "boolean"
     }
   }
 }

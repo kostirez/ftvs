@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Event } from "../strapi-model/event";
 import { StrapiService } from "../core/strapi.service";
 import { Application } from "../strapi-model/application";
+import { AuthService } from "./auth.service";
 
 const ENDPOINT = "events"
 
@@ -11,7 +12,8 @@ const ENDPOINT = "events"
 })
 export class EventService {
 
-  constructor(private strapi: StrapiService) { }
+  constructor(private strapi: StrapiService,
+              private authService: AuthService) { }
 
   getOne(id: number): Observable<Event> {
     return this.strapi.getOne<Event>(ENDPOINT, { populate: ["organizers", "applications", "img"] }, id);
@@ -28,11 +30,14 @@ export class EventService {
         populate: ['user']})
   }
 
-  getEventsByOrganizer(publicUserId: number): Observable<Event[]> {
-    return this.strapi.getMany<Event>("events",
-      {
-        "filters[organizers][id][$eq]": publicUserId,
-        populate: [] });
+  getMyEvents(): Observable<Event[]> {
+    if (this.authService.userId) {
+      return this.strapi.getMany<Event>("events",
+        {
+          "filters[organizers][id][$eq]": this.authService.userId,
+          populate: [] });
+    }
+    return of([]);
   }
 
 

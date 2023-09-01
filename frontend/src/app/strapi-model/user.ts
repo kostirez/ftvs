@@ -1,26 +1,20 @@
 import { Img } from "./img";
+import { Application } from "./application";
 
 export interface User {
+  id: number;
   username: string;
   email: string;
-  provider: string;
   confirmed: boolean;
   blocked: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  id: number;
-  publicUserId: number;
+  avatar: Img;
+  description: string;
+  organizer: boolean;
+  events: Event[];
+  applications: Application[]
 }
 
 export interface AuthUser {
   jwt: string;
   user: User;
-}
-
-export interface PublicUser {
-  id: number;
-  name: string;
-  description: string;
-  mail: string;
-  avatar: Img;
 }

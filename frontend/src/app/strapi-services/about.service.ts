@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { StrapiService } from "../core/strapi.service";
 import { Observable } from "rxjs";
-import { PublicUser } from "../strapi-model/user";
+import { User } from "../strapi-model/user";
 import { map } from "rxjs/operators";
 
 export interface AboutPageData {
   main: string;
-  people: PublicUser[];
+  people: User[];
 }
 
 @Injectable({
