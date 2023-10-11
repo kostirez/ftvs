@@ -13,7 +13,7 @@ import { Application } from "../../strapi-model/application";
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss']
+  styleUrls: [ './event.component.scss' ]
 })
 export class EventComponent implements OnInit, OnDestroy {
 
@@ -26,6 +26,11 @@ export class EventComponent implements OnInit, OnDestroy {
   private sub: Subscription;
 
   applicationStep = 0
+
+  // for user without registration
+  public name = "";
+  public email = "";
+  guestError = "";
 
   constructor(private eventService: EventService,
               private imageService: ImageService,
@@ -58,38 +63,59 @@ export class EventComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  goToRegistration() {
+    this.router.navigate([ '/login' ]);
+  }
+
   startRegistration() {
     const user = this.authService.currentUser;
-    if(!user) {
-      this.router.navigate(['/login' ]);
-    } else {
+    if (!user) {
       this.applicationStep = 1;
+    } else {
+      this.applicationStep = 2;
+    }
+  }
+
+  continueAsAGuest() {
+    if (this.name && this.email) {
+      this.applicationStep = 2;
+    } else {
+      this.guestError = "Zadejte validní jmeno a email"
     }
   }
 
   registerForEvent(event: Event) {
     const user = this.authService.currentUser;
-    this.applicationStep = 2;
-    if(user && user.id) {
-      const application: Application = {
+    this.applicationStep = 3;
+    let application: Application;
+    if (user && user.id) {
+      application = {
         approved: false,
         eventId: event.id,
         userId: user.id,
         submitDate: new Date,
       }
-      this.applicationService.add(application).toPromise()
-        .then(resp => {
-
-          console.log("resp", resp);
-          console.log("application", application);
-          this.applicationStep = 3;
-        })
-        .catch(e => {
-          console.error("error", e);
-          this.applicationStep = 2;
-        })
-
+    } else {
+      application = {
+        approved: false,
+        eventId: event.id,
+        submitDate: new Date,
+        guestName: this.name,
+        guestEmail: this.email,
+      }
     }
+    this.applicationService.add(application).toPromise()
+      .then(resp => {
+
+        console.log("resp", resp);
+        console.log("application", application);
+        this.applicationStep = 4;
+      })
+      .catch(e => {
+        console.error("error", e);
+        this.applicationStep = 3;
+      });
+
   }
 
   goBackToEventDetail() {

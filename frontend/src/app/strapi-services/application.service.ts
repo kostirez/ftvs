@@ -17,14 +17,27 @@ export class ApplicationService {
   constructor(private strapi: StrapiService) { }
 
   add(application: Application): Observable<ApplicationWithRelations> {
-    return this.strapi.post<ApplicationWithRelations>(
-      ENDPOINT,
-      {
-        approved: application.approved,
-        event: createRelation("connect", [application.eventId]),
-        user: createRelation("connect", [application.userId]),
-        submitDate: application.submitDate,
-      })
+    if (application.userId) {
+      return this.strapi.post<ApplicationWithRelations>(
+        ENDPOINT,
+        {
+          approved: application.approved,
+          event: createRelation("connect", [application.eventId]),
+          user: createRelation("connect", [application.userId]),
+          submitDate: application.submitDate,
+        })
+    } else {
+      return this.strapi.post<ApplicationWithRelations>(
+        ENDPOINT,
+        {
+          approved: application.approved,
+          event: createRelation("connect", [application.eventId]),
+          submitDate: application.submitDate,
+          guestName: application.guestName,
+          guestEmail: application.guestEmail,
+        })
+    }
+
   }
 
   approve(applicationId: number){

@@ -1,59 +1,83 @@
-
-<div *ngIf="$event | async as event">
+<div *ngIf="$event | async as event" xmlns="http://www.w3.org/1999/html">
   <div *ngIf="applicationStep===0">
     <div class="container">
       <section class="row mt-5">
-        <img class="col-md-6" [src]="getImg(event)" alt="event image">
-        <div class="col-md-6 pt-5 pt-md-0 px-md-5">
-          <h2>{{event.name}}</h2>
-          <p>{{event.description}}</p>
-        </div>
-      </section>
-      <section class="row mt-3 mt-md-5">
-        <div class="col-md-6 d-flex flex-column align-items-center align-items-md-start">
-          <h4>{{event.startDate | date}} - {{event.endDate | date}}</h4>
-          <h6 class="mt-3">Pocet prihlasenych: {{event.applications.length}}</h6>
-        </div>
-        <div class="col-md-6 d-flex flex-column align-items-center align-items-md-end">
-          <h3 class="mt-3 mt-md-0">{{event.price}}</h3>
-          <button class="mt-3 w-50 btn btn-primary btn-lg"
+        <img class="col-md-8" [src]="getImg(event)" alt="event image">
+        <div class="col-md-4 pt-5 pt-md-0 px-md-5 text-center my-auto">
+          <h1 class="mb-3">{{event.name}}</h1>
+          <h4 class="mb-3">{{event.startDate | date}}</h4>
+          <h3 class="mb-3 mt-md-0">{{event.price}}</h3>
+          <button class="mb-3 w-50 btn btn-primary btn-lg"
                   (click)="startRegistration()">
             prihlasit
           </button>
+          <h6 class="mt-3">Počet přihlášených: {{event.applications.length}}</h6>
         </div>
       </section>
-      <section class="row mt-5">
-        <h3>Galerie</h3>
-        <div *ngIf="photos$ | async as photos">
+      <section class="row mt-5 px-2 px-md-0">
+        <div class="col mt-md-5 d-flex flex-column align-items-center align-items-md-start overflow-scroll">
+          <p>{{event.description}}</p>
+        </div>
+      </section>
+      <section *ngIf="photos$ | async as photos"
+               class="row mt-5">
+        <ng-container *ngIf="photos.length > 0">
+          <h3>Fotky z předchozích akcí</h3>
           <div class="d-flex align-content-start flex-wrap">
             <div class="event-pic m-3" *ngFor="let photo of photos">
               <img class="img-thumbnail" [src]="getImg(photo)" alt="image">
               <p class="text-center">{{photo.description}}</p>
             </div>
           </div>
-        </div>
+        </ng-container>
       </section>
     </div>
   </div>
 
-<!--  summary -->
-  <div class="d-flex flex-column align-items-center gap-3 my-5"
+
+  <!--  summary -->
+  <div class="d-flex flex-column align-items-center gap-3 my-5 text-center"
        *ngIf="applicationStep===1">
+    <h3>Nejste přihlášen, chcete pokračovat v přihlášení jako host.</h3>
+    <p>Přihlášení uživatele maji levnější vstupné.</p>
+    <button class="btn btn-primary btn-lg" (click)="goToRegistration()">přhlasit / registrovat</button>
+
+    <div class="my-5 guest-box">
+      <section class="d-flex flex-column">
+        <h3>Pro přihlášení bez registrace zadejte jmeno a email.</h3>
+        <input class="mb-2 p-2 text-primary"
+               type="text" [(ngModel)]="name"
+               placeholder="username"/>
+        <input class="mb-2 p-2 text-primary"
+               type="text" [(ngModel)]="email"
+               placeholder="email"/>
+
+        <h6 class="text-danger my-1">{{guestError}}</h6>
+        <button class="btn btn-primary btn-lg mt-3" (click)="continueAsAGuest()">Pokračovat bez přihlášení</button>
+      </section>
+    </div>
+    <button class="btn btn-secondary mt-5" (click)="goBackToEventDetail()">zpet na detail akce</button>
+  </div>
+
+  <div class="d-flex flex-column align-items-center gap-3 my-5 text-center"
+       *ngIf="applicationStep===2">
     <h1>{{event.name}}</h1>
-    <h5>{{event.startDate | date}} - {{event.endDate | date}}</h5>
+    <h5>{{event.startDate | date}}</h5>
     <h5>opravdu se chcete prihlasit</h5>
-    <p>cena: {{event.price}}</p>
+    <h3>cena: {{event.price}}</h3>
+    <h4>{{name}}</h4>
+    <h4>{{email}}</h4>
     <button class="btn btn-primary btn-lg" (click)="registerForEvent(event)">zavazne prihlasit</button>
     <button class="btn btn-secondary" (click)="goBackToEventDetail()">zpet na detail akce</button>
   </div>
-<!--  loading -->
+  <!--  loading -->
   <div class="text-center my-5"
-       *ngIf="applicationStep===2">
+       *ngIf="applicationStep===3">
     <h4>prihlasovani...</h4>
   </div>
-<!--  finalization -->
+  <!--  finalization -->
   <div class="d-flex flex-column align-items-center gap-3 my-5"
-       *ngIf="applicationStep===3">
+       *ngIf="applicationStep===4">
     <h1>uspesne jste se prihlasili na akci {{event.name}}</h1>
     <h3>prosime uhradte castku {{event.price}} na ucet xxx</h3>
     <button class="btn btn-secondary" (click)="goBackToEventDetail()">zpet na detail akce</button>

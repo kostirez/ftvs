@@ -31,6 +31,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "applications"
+    },
+    "guestName": {
+      "type": "string"
+    },
+    "guestEmail": {
+      "type": "string"
     }
   }
 }
