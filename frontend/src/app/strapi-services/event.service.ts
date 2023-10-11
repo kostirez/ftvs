@@ -4,6 +4,7 @@ import { Event } from "../strapi-model/event";
 import { StrapiService } from "../core/strapi.service";
 import { Application } from "../strapi-model/application";
 import { AuthService } from "./auth.service";
+import { map } from "rxjs/operators";
 
 const ENDPOINT = "events"
 
@@ -13,21 +14,31 @@ const ENDPOINT = "events"
 export class EventService {
 
   constructor(private strapi: StrapiService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+  }
 
   getOne(id: number): Observable<Event> {
-    return this.strapi.getOne<Event>(ENDPOINT, { populate: ["organizers", "applications", "img"] }, id);
+    return this.strapi.getOne<Event>(ENDPOINT, {populate: [ "organizers", "applications", "img" ]}, id);
   }
 
   getMany(): Observable<Event[]> {
-    return this.strapi.getMany<Event>(ENDPOINT, { populate: "*" })
+    return this.strapi.getMany<Event>(ENDPOINT, {populate: "*"})
+      .pipe(
+        map(events => events.map(e =>
+          ({
+            ...e,
+            startDate: new Date(e.startDate),
+          }))
+        )
+      )
   }
 
-  getApplicationsForEventId(id: string) : Observable<Application[]> {
+  getApplicationsForEventId(id: string): Observable<Application[]> {
     return this.strapi.getMany<Application>("applications",
       {
         "filters[event][id][$eq]": id,
-        populate: ['user']})
+        populate: [ 'user' ]
+      })
   }
 
   getMyEvents(): Observable<Event[]> {
@@ -35,11 +46,9 @@ export class EventService {
       return this.strapi.getMany<Event>("events",
         {
           "filters[organizers][id][$eq]": this.authService.userId,
-          populate: [] });
+          populate: []
+        });
     }
     return of([]);
   }
-
-
-
 }

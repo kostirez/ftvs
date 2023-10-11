@@ -1,34 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EventService } from "../../strapi-services/event.service";
 import { Event } from "../../strapi-model/event";
 import { ImageService } from "../../core/image.service";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
 
-const CATEGORIES = [
-  "nadchazejici",
-  "Probehle",
+interface Category {
+  displeyName: string;
+  category: string;
+}
+
+const CATEGORIES: Category[] = [
+  {displeyName: "Naše akce", category: "nase" },
+  {displeyName: "Účastníme se", category: "cizi" },
 ]
 
+interface EventsInMonth {
+  month: {
+    name: string,
+    num: number,
+  };
+  count: number;
+}
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent implements OnInit, OnDestroy {
 
-  public $nearEvents: Observable<Event[]>;
+  public events: Event[] = [];
 
   public categories = CATEGORIES;
 
   public currentCategory = CATEGORIES[0];
+
+  public timeCategories: EventsInMonth[] = [{month: {name: "Všechno", num: -1}, count: 0}]
+
+  public currentTimeCategory: EventsInMonth = this.timeCategories[0];
+
+  private sub;
 
   constructor(
     private eventService: EventService,
     private imageService: ImageService,
     private router: Router,
   ) {
-    this.$nearEvents = this.eventService.getMany();
+    this.timeCategories.push(...this.fillMonths());
+    this.sub = this.eventService.getMany().subscribe(
+      events => {
+        this.events = events.filter(e => e.startDate > new Date());
+        this.updateMonthCounts();
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -46,7 +69,41 @@ export class EventsComponent implements OnInit {
     this.router.navigate(['/event', "" + id]);
   }
 
-  selectCategory(category: string) {
+  private fillMonths(): EventsInMonth[] {
+    const months = ["led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro"];
+    const monthsWithNum = months.map((m, index) => ({month: {name: m, num: index}, count: 0}))
+    const d = new Date();
+    return [...monthsWithNum.slice(d.getMonth()), ...monthsWithNum.slice(0,d.getMonth())];
+  }
+
+  selectCategory(category: Category) {
     this.currentCategory = category;
+  }
+
+  selectTimeCategory(category: EventsInMonth) {
+    this.currentTimeCategory = category;
+  }
+
+  updateMonthCounts(): void {
+    this.timeCategories[0].count = this.events.length;
+    this.events.forEach(e => {
+      const category = this.timeCategories.find(c => c.month.num === e.startDate.getMonth())
+      if (category){
+        category.count += 1;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  shouldBeDispley(event: Event) {
+    const correctMonth =
+      event.startDate.getMonth() === this.currentTimeCategory.month.num
+      || this.currentTimeCategory.month.num === -1;
+    const correctCategory =
+      this.currentCategory.category === event.category;
+    return correctCategory && correctMonth;
   }
 }

@@ -11,6 +11,7 @@ export interface Event {
   price: string;
   startDate: Date;
   endDate: Date;
+  category: string;
 }
 
 export interface EventWithRelations {

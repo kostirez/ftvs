@@ -1,33 +1,45 @@
 
-<h1 class="text-center m-5">Nase akce</h1>
+<h1 class="text-center m-5">Kalendář akcí</h1>
 <div class="container">
+
+  <div class="row">
+    <div class="col text-center"
+         role="button"
+         [ngClass]="mon===currentTimeCategory ? 'selected' :''"
+         (click)="selectTimeCategory(mon)"
+         *ngFor="let mon of timeCategories">
+      <h4>{{mon.month.name}} ({{mon.count}})</h4>
+    </div>
+  </div>
   <div class="row">
     <div class="col text-center"
          role="button"
          (click)="selectCategory(category)"
          *ngFor="let category of categories">
-      <h4>{{category}}</h4>
+      <h4>{{category.displeyName}}</h4>
       <div class="under-line"
            [ngClass]="category===currentCategory ? 'selected' :''"></div>
     </div>
   </div>
 </div>
-<div *ngIf="$nearEvents | async as events"
+<div *ngIf="events"
      class="container-md container-fluid my-5 ">
   <div class="row gx-5 gy-5">
     <div class="col-md-4"
          *ngFor="let event of events">
-      <div class="border border-primary border-3 rounded-3"
-           (click)="navigateToEvent(event.id)"
-           role="button">
-        <img [src]="getImg(event)" class="w-100 img-fluid img-thumbnail mb-3" alt="...">
-        <h4 class="mb-3 mx-3">{{event.name}}</h4>
-        <div class="mb-3 mx-3">
-          <h6 class="col p-0">{{event.startDate | date}}</h6>
-          <h6 class="col">{{event.endDate | date}}</h6>
+      <ng-container *ngIf="shouldBeDispley(event)">
+        <div class="border border-primary border-3 rounded-3"
+             (click)="navigateToEvent(event.id)"
+             role="button">
+          <img [src]="getImg(event)" class="w-100 img-fluid img-thumbnail mb-3" alt="...">
+          <h4 class="mb-3 mx-3">{{event.name}}</h4>
+          <div class="mb-3 mx-3">
+            <h6 class="col p-0">{{event.startDate | date}}</h6>
+            <h6 class="col">{{event.endDate | date}}</h6>
+          </div>
+          <h5 class="mb-3 mx-3">{{event.price}}</h5>
         </div>
-        <h5 class="mb-3 mx-3">{{event.price}}</h5>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>
