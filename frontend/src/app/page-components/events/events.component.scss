@@ -10,6 +10,41 @@
   background-color: #d8e7d8;
 }
 
-.selected{
-  background-color: green;
+
+
+.months-menu{
+  white-space: nowrap;
+  overflow-x: auto;
+  .month-box {
+    display: inline-block;
+    float: none;
+    margin: 0;
+    width: 8rem;
+    background-color: #d8e7d8;
+    border: solid 1px #888787;
+    div {
+      padding: 0.5rem;
+    }
+    .selected {
+      background-color: green;
+      color: white;
+    }
+  }
+  .empty {
+    background-color: #a3a6a3;
+  }
 }
+
+.category-box {
+  padding: 1rem;
+  background-color: #d8e7d8;
+}
+
+.selectedCategory {
+  background-color: green;
+  color: white
+}
+
+
+
+

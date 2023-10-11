@@ -1,24 +1,27 @@
 
 <h1 class="text-center m-5">Kalendář akcí</h1>
-<div class="container">
-
-  <div class="row">
-    <div class="col text-center"
+<div class="container mb-5">
+  <div class="months-menu mx-1  x ">
+    <div class="text-center month-box "
+         [ngClass]="mon.count===0 ? 'empty': ''"
          role="button"
-         [ngClass]="mon===currentTimeCategory ? 'selected' :''"
          (click)="selectTimeCategory(mon)"
          *ngFor="let mon of timeCategories">
-      <h4>{{mon.month.name}} ({{mon.count}})</h4>
+      <div [ngClass]="mon=== currentTimeCategory ? 'selected': ''">
+        <h4>{{mon.month.name}}</h4>
+        <h4> ({{mon.count}})</h4>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col text-center"
+</div>
+<div class="container mb-5">
+  <div class="row mx-1">
+    <div class="col text-center category-box"
          role="button"
+         [ngClass]="category===currentCategory ? 'selectedCategory' :''"
          (click)="selectCategory(category)"
          *ngFor="let category of categories">
       <h4>{{category.displeyName}}</h4>
-      <div class="under-line"
-           [ngClass]="category===currentCategory ? 'selected' :''"></div>
     </div>
   </div>
 </div>
