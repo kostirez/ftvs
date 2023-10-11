@@ -1,18 +1,31 @@
-
 <div *ngIf="data$ | async as data">
-  <h1 class="text-center mt-5">O nas</h1>
-  <p class="text-center mt-5">{{data.main}}</p>
-
-  <h1 class="text-center mt-5">kdo to vede</h1>
-  <div class="card-group d-flex flex-row my-5">
-    <div class="user-card mx-auto" *ngFor="let user of data.people">
+  <section class="mx-5 text-center">
+    <h1 class="">O nas</h1>
+    <p class="mt-5">{{data.main}}</p>
+  </section>
+  <section class="mx-5 text-center">
+    <h1 class="">kdo to vede</h1>
+    <div class="card-group d-flex flex-row my-5">
+      <div class="user-card mx-auto" *ngFor="let user of data.people">
         <img class="card-img-top m-2" [src]="getImg(user)" alt="user image">
-      <div class="card-body">
-        <h5 class="card-title text-center mt-2">{{user.username}}</h5>
-        <p class="card-text text-center mt-2">{{user.description}}</p>
-        <p class="card-text text-center mt-2">{{user.email}}</p>
+        <div class="card-body">
+          <h5 class="card-title text-center mt-2">{{user.username}}</h5>
+          <p class="card-text text-center mt-2">{{user.description}}</p>
+          <p class="card-text text-center mt-2">{{user.email}}</p>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+  <section class="mx-5 text-center">
+    <h1>Sponzoři</h1>
+    <div class="card-group d-flex flex-row my-5">
+      <div class="user-card mx-auto" *ngFor="let sponsor of sponsors">
+        <img class="card-img-top m-2" [src]="getImgSponsor(sponsor)" alt="user image">
+        <div class="card-body">
+          <h5 class="card-title text-center mt-2">{{sponsor.name}}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
