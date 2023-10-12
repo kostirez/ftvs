@@ -32,7 +32,7 @@
           <a class="nav-link" (click)="toggleNavbar()" [routerLink]="'/user/' + user.id">{{user.username}}</a>
         </li>
         <li class="nav-item" *ngIf="user">
-          <a class="nav-link" (click)="logOff()"  routerLink="login/">odhlasit se</a>
+          <a class="nav-link" (click)="logOff()" routerLink="login/">odhlasit se</a>
         </li>
       </ul>
     </div>
@@ -50,24 +50,34 @@
         <img class="w-100 my-2    " src="/assets/logo.png" alt="image">
       </section>
 
-      <section class="col-md-4 my-2 text-center">
-        <h1>Kontakt</h1>
-        <div class="my-1">adresa</div>
-        <div class="my-1">mail</div>
-        <div class="my-1">telefon</div>
+      <section class="col-md-4 my-2 my-md-auto text-center">
+        <ng-container *ngIf="contact">
+          <h5 class="my-3">{{contact.name}}</h5>
+          <h5 class="my-2">Adresa: {{contact.address}}</h5>
+          <h5 class="my-2">Ičo: {{contact.ico}}</h5>
+          <h5 class="my-2">Účet: {{contact.accountNumber}}</h5>
+        </ng-container>
       </section>
 
-      <section class="col-md-4 my-2 text-center">
-        <h4>sledujte nas na</h4>
-        <!-- Facebook -->
-        <a class="btn text-white btn-floating m-1 social-icon">
-          <i class="bi bi-facebook fb"></i>
-        </a>
+      <section class="col-md-4 my-2 my-md-auto text-center">
+        <ng-container *ngIf="contact">
+          <h5 class="my-3">Email: {{contact.email}}</h5>
 
-        <!-- Instagram -->
-        <a class="btn text-white btn-floating m-1 social-icon">
-          <i class="bi--md bi-instagram ig"></i>
-        </a>
+          <h4>sledujte nas na</h4>
+          <!-- Facebook -->
+          <a class="btn text-white btn-floating m-2 social-icon"
+             [href]="contact.fbLink"
+             target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-facebook fb"></i>
+          </a>
+
+          <!-- Instagram -->
+          <a class="btn text-white btn-floating m-2 social-icon"
+             [href]="contact.fbLink"
+             target="_blank" rel="noopener noreferrer">
+            <i class="bi--md bi-instagram ig"></i>
+          </a>
+        </ng-container>
 
       </section>
     </div>

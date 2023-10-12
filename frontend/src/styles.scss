@@ -30,3 +30,14 @@ $theme-colors: (
 //@import "~bootstrap/dist/css/bootstrap.css";
 
 
+.social-icon {
+  font-size: 30px;
+  background-color: #cbcecb;
+  .fb {
+    color: #1877f2;
+  }
+
+  .ig {
+    color: #9f0598;
+  }
+}

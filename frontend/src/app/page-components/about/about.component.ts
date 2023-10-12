@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AboutPageData, AboutService } from "../../strapi-services/about.service";
-import { Observable } from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AboutPageData, AboutService, Contact } from "../../strapi-services/about.service";
+import { Observable, Subscription } from "rxjs";
 import { UserService } from "../../strapi-services/user.service";
 import {  User } from "../../strapi-model/user";
 import { ImageService } from "../../core/image.service";
@@ -11,11 +11,15 @@ import { Sponsor, SponsorService } from "../../strapi-services/sponsor.service";
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
 
   data$: Observable<AboutPageData> | null;
 
   sponsors: Sponsor[] = [];
+
+  contact: Contact | null = null;
+
+  subs: Subscription[] = []
 
   constructor(
     private aboutService: AboutService,
@@ -25,11 +29,11 @@ export class AboutComponent implements OnInit {
 
   ) {
     this.data$ = this.aboutService.getAbout()
+    this.subs.push(
+      this.sponsorService.getMany().subscribe(s => this.sponsors = s));
+    this.subs.push(
+      this.aboutService.getContacts().subscribe(c => this.contact = c));
 
-    this.data$.subscribe(s => console.log(s.people[0].avatar))
-    this.sponsorService.getMany().subscribe(s => {
-      this.sponsors = s
-    });
   }
 
   public getImg(user: User): string {
@@ -49,6 +53,10 @@ export class AboutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
 }

@@ -9,6 +9,16 @@ export interface AboutPageData {
   people: User[];
 }
 
+export interface Contact {
+  name: string;
+  address: string;
+  ico: number;
+  email: string;
+  accountNumber: string;
+  fbLink: string;
+  igLink: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,5 +42,9 @@ export class AboutService {
           }
       ))
       )
+  }
+
+  getContacts(): Observable<Contact> {
+    return this.strapi.getSingleType<Contact>("contact", {});
   }
 }

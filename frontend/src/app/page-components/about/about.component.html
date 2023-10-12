@@ -17,6 +17,34 @@
     </div>
   </section>
   <section class="mx-5 text-center">
+    <h1>Kontakt</h1>
+    <ng-container *ngIf="contact">
+      <div class="card-group d-flex flex-column flex-md-row my-5">
+        <div class="mx-auto">
+          <h2>Adresa: {{contact.address}}</h2>
+          <h2>Ičo: {{contact.ico}}</h2>
+          <h2>Účet: {{contact.accountNumber}}</h2>
+        </div>
+        <div class="mx-auto">
+          <h2>{{contact.email}}</h2>
+
+          <a class="btn text-white m-1 social-icon"
+             [href]="contact.fbLink"
+             target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-facebook fb"></i>
+          </a>
+
+          <!-- Instagram -->
+          <a class="btn text-white m-1 social-icon"
+             [href]="contact.igLink"
+             target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-instagram ig"></i>
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </section>
+  <section class="mx-5 text-center">
     <h1>Sponzoři</h1>
     <div class="card-group d-flex flex-row my-5">
       <div class="user-card mx-auto" *ngFor="let sponsor of sponsors">
