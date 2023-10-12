@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from "../../strapi-services/auth.service";
 import { Router } from "@angular/router";
 import { UserService } from "../../strapi-services/user.service";
+import { AboutMembership, AboutService } from "../../strapi-services/about.service";
+import { Subscription } from "rxjs";
 
 type TabType = "login" | "registration";
 
@@ -15,9 +17,11 @@ interface Tab {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   tab: Tab;
+
+  membership: AboutMembership | null = null;
 
   username = "";
   email = "";
@@ -25,17 +29,27 @@ export class LoginComponent implements OnInit {
 
   error = "";
 
+  subs: Subscription[] = []
+
   constructor(private authService: AuthService,
               private router: Router,
               private userService: UserService,
+              private aboutService: AboutService,
   ) {
     this.tab = {
       tabType: "login",
       label: "login",
     }
+    this.subs.push(
+      this.aboutService.getAboutMembership().subscribe(m => this.membership = m));
   }
 
+
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   activateTab(type: TabType) {
@@ -92,4 +106,5 @@ export class LoginComponent implements OnInit {
         }
       })
   }
+
 }

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_memberships",
+  "info": {
+    "singularName": "about-membership",
+    "pluralName": "about-memberships",
+    "displayName": "About-membership"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "mainText": {
+      "type": "text"
+    }
+  }
+}

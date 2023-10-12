@@ -7,6 +7,7 @@ import { EventComponent } from "./page-components/event/event.component";
 import { EventsComponent } from "./page-components/events/events.component";
 import { AboutComponent } from "./page-components/about/about.component";
 import { GalleryComponent } from "./page-components/gallery/gallery.component";
+import { DocumentsComponent } from "./page-components/documents/documents.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'events', component: EventsComponent },
   { path: 'gallery', component: GalleryComponent },
+  { path: 'documents', component: DocumentsComponent },
   { path: 'user/:id', component: UserComponent },
   { path: 'event/:id', component: EventComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },

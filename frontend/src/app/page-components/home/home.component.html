@@ -1,7 +1,7 @@
 <div class="text-center">
   <img class="mw-100" src="/assets/logo.png" alt="image">
   <h3>Jsme univerzitní studentský spolek Univerzity Karlovy.</h3>
-  <button type="button" class="btn btn-secondary btn-lg">
+  <button type="button" class="btn btn-primary btn-lg">
     <a class="nav-link" routerLink="/login">Pridej se k nam</a>
   </button>
 </div>
@@ -11,7 +11,7 @@
     *ngFor="let item of items">
       <h3>{{item.headline}}</h3>
       <img [src]="item.pic" alt="image">
-      <button type="button" class="btn btn-secondary btn-lg">
+      <button type="button" class="btn btn-primary btn-lg">
         <a class="nav-link" [routerLink]="item.link">{{item.btnText}}</a>
       </button>
     </section>

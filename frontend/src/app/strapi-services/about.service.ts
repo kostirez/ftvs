@@ -19,6 +19,10 @@ export interface Contact {
   igLink: string;
 }
 
+export interface AboutMembership {
+  mainText: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,5 +50,9 @@ export class AboutService {
 
   getContacts(): Observable<Contact> {
     return this.strapi.getSingleType<Contact>("contact", {});
+  }
+
+  getAboutMembership(): Observable<AboutMembership> {
+    return this.strapi.getSingleType<AboutMembership>("about-membership", {});
   }
 }
