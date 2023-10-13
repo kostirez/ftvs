@@ -1,5 +1,4 @@
-
-<h1 class="text-center m-5">Kalendář akcí</h1>
+<h1 class="text-center m-5 text-dark">Kalendář akcí</h1>
 <div class="container mb-5">
   <div class="months-menu mx-1  x ">
     <div class="text-center month-box "
@@ -26,21 +25,27 @@
   </div>
 </div>
 <div *ngIf="events"
-     class="container-md container-fluid my-5 ">
-  <div class="row gx-5 gy-5">
+     class="container-md my-5 ">
+  <div class="d-flex flex-column flex-md-row">
     <div class="col-md-4"
          *ngFor="let event of events">
       <ng-container *ngIf="shouldBeDispley(event)">
-        <div class="border border-primary border-3 rounded-3"
+        <div class="event-box"
              (click)="navigateToEvent(event.id)"
              role="button">
-          <img [src]="getImg(event)" class="w-100 img-fluid img-thumbnail mb-3" alt="...">
-          <h4 class="mb-3 mx-3">{{event.name}}</h4>
-          <div class="mb-3 mx-3">
-            <h6 class="col p-0">{{event.startDate | date}}</h6>
-            <h6 class="col">{{event.endDate | date}}</h6>
+          <img [src]="getImg(event)" class="w-100 img-fluid mb-3" alt="...">
+          <div class="container m-4">
+            <div class="row">
+              <h2 class="col text-primary">{{event.name}}</h2>
+            </div>
+            <div class="row">
+              <h5 class="col text-dark">{{event.startDate | date}}</h5>
+            </div>
+            <div class="row">
+              <h5 class="col text-dark">{{event.startDate | date}}</h5>
+              <h3 class="col text-primary text-center">{{event.price}}</h3>
+            </div>
           </div>
-          <h5 class="mb-3 mx-3">{{event.price}}</h5>
         </div>
       </ng-container>
     </div>

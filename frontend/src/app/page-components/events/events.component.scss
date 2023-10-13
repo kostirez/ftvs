@@ -1,50 +1,61 @@
+@import "./../../../styles";
 
 .card-description {
   max-height: 15em;
 }
 
-.under-line {
-  width: 100%;
-  height: 5px;
-  border-radius: 2px;
-  background-color: #d8e7d8;
-}
-
-
-
 .months-menu{
   white-space: nowrap;
   overflow-x: auto;
+  border: solid 1px $dark;
   .month-box {
     display: inline-block;
     float: none;
     margin: 0;
     width: 8rem;
-    background-color: #d8e7d8;
-    border: solid 1px #888787;
+    color: $dark;
+    background-color: $medium;
+    border: solid 1px $dark;
     div {
       padding: 0.5rem;
     }
     .selected {
-      background-color: green;
+      background-color: $dark;
       color: white;
     }
   }
   .empty {
-    background-color: #a3a6a3;
+    background-color: $light;
   }
 }
 
 .category-box {
   padding: 1rem;
-  background-color: #d8e7d8;
+  background-color: $light;
+  color: $dark;
 }
 
 .selectedCategory {
-  background-color: green;
+  background-color: $dark;
   color: white
 }
 
+.event-box {
+  border: solid 5px $dark;
+  background-color: $light;
+  transition: 0.3s;
+  margin-bottom: 2rem;
+  img {
+    margin-top: 1px;
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
+.event-box:hover {
+  padding: 10px;
+  transition: 0.3s;
+}
 
 
 
