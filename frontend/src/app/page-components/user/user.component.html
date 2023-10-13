@@ -22,6 +22,7 @@
                  (click)="goToEvent(event.id)">
               <h3>{{event.name}}</h3>
               <h5>{{event.startDate | date}}</h5>
+              <h5>{{event.place}}</h5>
               <h5 *ngIf="event.applications">Počet přihlášených: {{event.applications.length}}</h5>
               <p>cena: {{event.price}}</p>
             </div>

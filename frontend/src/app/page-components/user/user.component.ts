@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export interface userApplicationCard {
   name: string;
   start: Date;
-  end: Date;
+  place: string;
   paid: boolean;
   price: string;
   submitDate: Date;

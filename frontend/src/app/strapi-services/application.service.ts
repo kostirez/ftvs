@@ -60,7 +60,7 @@ export class ApplicationService {
           map(a => a.map(item => ({
             name: item.event.name,
             start: item.event.startDate,
-            end: item.event.endDate,
+            place: item.event.place,
             paid: item.approved,
             price: item.event.price,
             submitDate: item.submitDate,

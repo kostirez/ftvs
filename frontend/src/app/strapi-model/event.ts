@@ -10,7 +10,7 @@ export interface Event {
   organizers: number[];
   price: string;
   startDate: Date;
-  endDate: Date;
+  place: string
   category: string;
 }
 
