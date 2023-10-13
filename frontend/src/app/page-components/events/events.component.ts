@@ -18,6 +18,7 @@ interface EventsInMonth {
   month: {
     name: string,
     num: number,
+    year?: number,
   };
   count: number;
 }
@@ -71,9 +72,19 @@ export class EventsComponent implements OnInit, OnDestroy {
 
   private fillMonths(): EventsInMonth[] {
     const months = ["led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro"];
-    const monthsWithNum = months.map((m, index) => ({month: {name: m, num: index}, count: 0}))
     const d = new Date();
-    return [...monthsWithNum.slice(d.getMonth()), ...monthsWithNum.slice(0,d.getMonth())];
+    const monthsWithNum = months.map((m, index) =>
+      ({
+        month: {
+          name: m,
+          num: index,
+          year: d.getMonth() <= index ? d.getFullYear() : d.getFullYear() +1
+        },
+        count: 0
+      }))
+    const thisYear = monthsWithNum.slice(d.getMonth());
+    const nextYear = monthsWithNum.slice(0,d.getMonth());
+    return [...thisYear, ...nextYear];
   }
 
   selectCategory(category: Category) {

@@ -8,6 +8,7 @@
          *ngFor="let mon of timeCategories">
       <div [ngClass]="mon=== currentTimeCategory ? 'selected': ''">
         <h4>{{mon.month.name}}</h4>
+        <h4>{{mon.month.year || '-'}}</h4>
         <h4> ({{mon.count}})</h4>
       </div>
     </div>
