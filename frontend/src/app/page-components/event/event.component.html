@@ -2,21 +2,22 @@
   <div *ngIf="applicationStep===0">
     <div class="container">
       <section class="row mt-5">
-        <img class="col-md-8" [src]="getImg(event)" alt="event image">
+        <img class="col-md-8 main-img" [src]="getImg(event)" alt="event image">
         <div class="col-md-4 pt-5 pt-md-0 px-md-5 text-center my-auto">
-          <h1 class="mb-3">{{event.name}}</h1>
-          <h4 class="mb-3">{{event.startDate | date}}</h4>
-          <h3 class="mb-3 mt-md-0">{{event.price}}</h3>
-          <button class="mb-3 w-50 btn btn-primary btn-lg"
+          <h1 class="mb-3 text-primary">{{event.name}}</h1>
+          <h4 class="mb-3 text-dark">{{event.startDate | date}}</h4>
+          <h4 class="mb-3 text-dark">{{event.startDate | date}}</h4>
+          <h3 class="mb-3 mt-md-0 text-primary">{{event.price}}</h3>
+          <button class="mb-3 w-50 btn btn-primary btn-lg text-white"
                   (click)="startRegistration()">
             prihlasit
           </button>
-          <h6 class="mt-3">Počet přihlášených: {{event.applications.length}}</h6>
+          <h6 class="mt-3 text-dark">Počet přihlášených: {{event.applications.length}}</h6>
         </div>
       </section>
       <section class="row mt-5 px-2 px-md-0">
         <div class="col mt-md-5 d-flex flex-column align-items-center align-items-md-start overflow-scroll">
-          <p>{{event.description}}</p>
+          <p class="text-dark">{{event.description}}</p>
         </div>
       </section>
       <section *ngIf="photos$ | async as photos"
