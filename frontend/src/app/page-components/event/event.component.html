@@ -37,13 +37,13 @@
 
 
   <!--  summary -->
-  <div class="d-flex flex-column align-items-center gap-3 my-5 text-center"
+  <div class="d-flex flex-column align-items-center gap-3 my-5 text-center text-dark"
        *ngIf="applicationStep===1">
     <h3>Nejste přihlášen, chcete pokračovat v přihlášení jako host.</h3>
     <p>Přihlášení uživatele maji levnější vstupné.</p>
     <button class="btn btn-primary btn-lg" (click)="goToRegistration()">přhlasit / registrovat</button>
 
-    <div class="my-5 guest-box">
+    <div class="my-5 guest-box bg-dark">
       <section class="d-flex flex-column">
         <h3>Pro přihlášení bez registrace zadejte jmeno a email.</h3>
         <input class="mb-2 p-2 text-primary"
@@ -54,10 +54,10 @@
                placeholder="email"/>
 
         <h6 class="text-danger my-1">{{guestError}}</h6>
-        <button class="btn btn-primary btn-lg mt-3" (click)="continueAsAGuest()">Pokračovat bez přihlášení</button>
       </section>
+      <button class="btn btn-primary btn-lg mt-3" (click)="continueAsAGuest()">Pokračovat bez přihlášení</button>
     </div>
-    <button class="btn btn-secondary mt-5" (click)="goBackToEventDetail()">zpet na detail akce</button>
+    <button class="btn btn-dark mt-5" (click)="goBackToEventDetail()">zpet na detail akce</button>
   </div>
 
   <div class="d-flex flex-column align-items-center gap-3 my-5 text-center"
@@ -68,8 +68,8 @@
     <h3>cena: {{event.price}}</h3>
     <h4>{{name}}</h4>
     <h4>{{email}}</h4>
-    <button class="btn btn-primary btn-lg" (click)="registerForEvent(event)">zavazne prihlasit</button>
-    <button class="btn btn-secondary" (click)="goBackToEventDetail()">zpet na detail akce</button>
+    <button class="btn btn-primary px-5 py-2 btn-lg" (click)="registerForEvent(event)">zavazne prihlasit</button>
+    <button class="btn btn-dark" (click)="goBackToEventDetail()">zpet na detail akce</button>
   </div>
   <!--  loading -->
   <div class="text-center my-5"
@@ -81,6 +81,6 @@
        *ngIf="applicationStep===4">
     <h1>uspesne jste se prihlasili na akci {{event.name}}</h1>
     <h3>prosime uhradte castku {{event.price}} na ucet xxx</h3>
-    <button class="btn btn-secondary" (click)="goBackToEventDetail()">zpet na detail akce</button>
+    <button class="btn btn-dark bg-dark" (click)="goBackToEventDetail()">zpet na detail akce</button>
   </div>
 </div>

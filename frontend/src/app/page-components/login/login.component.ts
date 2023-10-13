@@ -12,6 +12,17 @@ interface Tab {
   label: string;
 }
 
+const TABS: Tab[] = [
+  {
+    tabType: "login",
+    label: "Prihlasit se",
+  },
+  {
+    tabType: "registration",
+    label: "Registrovat se",
+  }
+]
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,6 +31,8 @@ interface Tab {
 export class LoginComponent implements OnInit, OnDestroy {
 
   tab: Tab;
+
+  tabs = TABS;
 
   membership: AboutMembership | null = null;
 
@@ -36,10 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               private userService: UserService,
               private aboutService: AboutService,
   ) {
-    this.tab = {
-      tabType: "login",
-      label: "login",
-    }
+    this.tab = this.tabs[0];
     this.subs.push(
       this.aboutService.getAboutMembership().subscribe(m => this.membership = m));
   }
@@ -52,8 +62,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subs.forEach(s => s.unsubscribe());
   }
 
-  activateTab(type: TabType) {
-    this.tab.tabType = type;
+  activateTab(t: Tab) {
+    this.tab = t;
   }
 
   createAccount() {

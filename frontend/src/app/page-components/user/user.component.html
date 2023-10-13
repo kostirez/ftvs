@@ -4,9 +4,9 @@
       <div *ngIf="getImg(user)" class="col-md-6">
         <img class="mw-100" [src]="getImg(user)" alt="user image">
       </div>
-      <div class="col-md pt-5 pt-md-0 px-md-5 text-center text-md-left">
-        <h4 class="mb-3">{{user.username}}</h4>
-        <h6 class="mb-3">{{user.email}}</h6>
+      <div class="col-md pt-5 pt-md-0 px-md-5 text-center text-dark text-md-left">
+        <h1 class="mb-3">{{user.username}}</h1>
+        <h2 class="mb-3">{{user.email}}</h2>
         <p *ngIf="user.description">{{user.description}}</p>
       </div>
     </section>
@@ -14,50 +14,50 @@
       <ng-container *ngIf="organizedEvents$ | async as events">
         <div class="col-md"
              *ngIf="events.length > 0">
-          <h2 class="text-center">Akce, ktere organizuji</h2>
+          <h2 class="text-center text-primary">Akce, které organizuji</h2>
           <div class="d-flex flex-wrap align-items-center">
             <div class="event-box border-primary"
                  role="button"
                  *ngFor="let event of events"
                  (click)="goToEvent(event.id)">
               <h3>{{event.name}}</h3>
-              <h5>{{event.startDate | date}} - {{event.endDate | date}}</h5>
-              <h5 *ngIf="event.applications">pocet prihlasenych: {{event.applications.length}}</h5>
+              <h5>{{event.startDate | date}}</h5>
+              <h5 *ngIf="event.applications">Počet přihlášených: {{event.applications.length}}</h5>
               <p>cena: {{event.price}}</p>
             </div>
           </div>
         </div>
       </ng-container>
       <div class="col-md" *ngIf="applicationCards$ | async as cards">
-        <h2 class="text-center">prihlasky na Akce</h2>
+        <h2 class="text-center text-primary my-5">Přihlášky na akce</h2>
         <div class="d-flex flex-wrap align-items-center">
-          <div class="event-box border-primary"
+          <div class="event-box border-primary text-dark text-center bg-light"
                role="button"
                *ngFor="let card of cards"
                (click)="goToEvent(card.id)">
-            <h3>{{card.name}}</h3>
-            <h6>{{card.start | date}} - {{card.end | date}}</h6>
-            <h5>Zaplaceno: {{card.paid ? "ano" : "ne"}}</h5>
-            <p>Cena: {{card.price}}</p>
+            <h2 class="text-primary">{{card.name}}</h2>
+            <h5>{{card.start | date}}</h5>
+            <h6 class="d-inline-block">Zaplaceno: </h6><h4 class="d-inline-block p-2" [ngClass]="card.paid ? 'text-success' : 'text-danger'"> {{card.paid ? "ano" : "ne"}}</h4>
+            <h6>Cena: {{card.price}}</h6>
           </div>
-          <div class="event-box border-primary"
+          <div class="event-box border-primary bg-light"
                role="button"
                (click)="goToEvents()">
-            <p *ngIf="cards.length===0">Nejste prihlasen na zadnou akci</p>
-            <h2 class="mt-3">Prihlasit se na dalsi akci</h2>
+            <p *ngIf="cards.length===0">Nejste přihlášen na žádnou akci</p>
+            <h2 class="mt-3">Přihlásit se na další akci</h2>
           </div>
         </div>
       </div>
     </section>
     <section class="row my-5">
       <div class="col">
-        <button class="btn btn-secondary setting-btn" (click)="changePassword()">zmenit heslo</button>
-        <button class="btn btn-secondary setting-btn" (click)="deleteAccount()">zrusit ucet</button>
+        <button class="btn btn-dark setting-btn" (click)="changePassword()">zmenit heslo</button>
+        <button class="btn btn-dark setting-btn" (click)="deleteAccount()">zrusit ucet</button>
       </div>
     </section>
   </div>
 </div>
-<div class="user-container  bg-secondary text-center" *ngIf="!user">
+<div class="user-container  bg-light text-center" *ngIf="!user">
   <h3 class="mt-5">nejste prihlaseny</h3>
-  <button class="mt-5 btn btn-primary" (click)="goToLogin()">prihlasit se</button>
+  <button class="mt-5 btn btn-primary btn-lg px-5 py-2" (click)="goToLogin()">prihlasit se</button>
 </div>

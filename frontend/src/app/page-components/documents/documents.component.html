@@ -1,9 +1,9 @@
 <section class="m-5 text-center">
-  <h1 class="">Dokumenty ke stažení</h1>
+  <h1 class="text-dark">Dokumenty ke stažení</h1>
   <ng-container *ngIf="documents">
     <div class="d-flex align-content-start flex-wrap my-3 my-md-5">
       <div *ngFor="let doc of documents"
-           class="doc-box m-3"
+           class="doc-box my-3"
            (click)="startDownload(doc)">
         <i class="bi bi-file-earmark-font"></i>
         <h4 class="m-2">{{doc.name}}</h4>

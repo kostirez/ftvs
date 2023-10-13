@@ -1,5 +1,11 @@
 
 .photo-box {
   width: 300px;
-  height: 300px;
+  height: 350px;
+  margin: auto;
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+  }
 }

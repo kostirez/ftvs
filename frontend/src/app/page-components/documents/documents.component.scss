@@ -1,9 +1,11 @@
+@import "./../../../styles";
 
 .doc-box {
   min-width: 200px;
   min-height: 200px;
-  background-color: #d8e7d8;
-  border: solid #9f0598 1px;
+  margin: auto;
+  background-color: $light;
+  border: solid $primary 1px;
   border-radius: 2px;
   font-size: 60px;
   padding: 30px;
