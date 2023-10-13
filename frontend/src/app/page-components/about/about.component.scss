@@ -1,7 +1,16 @@
+@import "./../../../styles";
 
 
 .user-card {
   width: 300px;
-  border: solid 2px darkred;
+  border: solid 2px $primary;
   padding: 2rem;
+}
+
+.contact-box {
+  background-color: $dark;
+  color: white;
+  padding: 3rem;
+  margin: 2rem auto;
+  min-width: 400px;
 }

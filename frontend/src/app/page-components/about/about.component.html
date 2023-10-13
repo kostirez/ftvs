@@ -1,56 +1,68 @@
+<h1 class="text-center m-5 text-dark">O nás</h1>
 <div *ngIf="data$ | async as data">
-  <section class="mx-5 text-center">
-    <h1 class="">O nas</h1>
-    <p class="mt-5">{{data.main}}</p>
+  <section class="my-5 text-center">
+    <div class="container-md container-fluid">
+      <h5 class="mt-5 text-dark">{{data.main}}</h5>
+    </div>
   </section>
-  <section class="mx-5 text-center">
-    <h1 class="">kdo to vede</h1>
-    <div class="card-group d-flex flex-row my-5">
-      <div class="user-card mx-auto" *ngFor="let user of data.people">
-        <img class="card-img-top m-2" [src]="getImg(user)" alt="user image">
-        <div class="card-body">
-          <h5 class="card-title text-center mt-2">{{user.username}}</h5>
-          <p class="card-text text-center mt-2">{{user.description}}</p>
-          <p class="card-text text-center mt-2">{{user.email}}</p>
+  <section class="text-center bg-dark">
+    <div class="container-md container-fluid px-md-5 py-5">
+      <h1 class="text-center mb-5 text-white">Kdo to tu vede</h1>
+      <div class="card-group d-flex flex-row my-5">
+        <div class="user-card mx-auto bg-light" *ngFor="let user of data.people">
+          <img class="card-img-top m-2" [src]="getImg(user)" alt="user image">
+          <div class="card-body">
+            <h3 class="card-title text-center mt-2 text-primary">{{user.username}}</h3>
+            <p class="card-text text-center mt-2 text-dark">{{user.description}}</p>
+            <p class="card-text text-center mt-2 text-dark">{{user.email}}</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="mx-5 text-center">
-    <h1>Kontakt</h1>
-    <ng-container *ngIf="contact">
-      <div class="card-group d-flex flex-column flex-md-row my-5">
-        <div class="mx-auto">
-          <h2>Adresa: {{contact.address}}</h2>
-          <h2>Ičo: {{contact.ico}}</h2>
-          <h2>Účet: {{contact.accountNumber}}</h2>
-        </div>
-        <div class="mx-auto">
-          <h2>{{contact.email}}</h2>
+  <section class="text-center bg-white">
+    <div class="container-md container-fluid px-md-5 py-5 ">
+      <h1 class="text-center mb-5 text-dark">Kontakt</h1>
+      <ng-container *ngIf="contact">
+        <div class="card-group d-flex flex-column flex-md-row my-5">
+          <div class="contact-box">
+            <h5 class="text-light">Adresa:</h5>
+            <h2>{{contact.address}}</h2>
+            <h5 class="text-light">Ičo:</h5>
+            <h2>{{contact.ico}}</h2>
+            <h5 class="text-light">Účet:</h5>
+            <h2>{{contact.accountNumber}}</h2>
+          </div>
+          <div class="contact-box">
+            <h5 class="text-light">Email:</h5>
+            <h2>{{contact.email}}</h2>
+            <h5 class="text-light">Sociální sítě:</h5>
+            <a class="btn text-white m-1 social-icon"
+               [href]="contact.fbLink"
+               target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-facebook fb"></i>
+            </a>
 
-          <a class="btn text-white m-1 social-icon"
-             [href]="contact.fbLink"
-             target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-facebook fb"></i>
-          </a>
-
-          <!-- Instagram -->
-          <a class="btn text-white m-1 social-icon"
-             [href]="contact.igLink"
-             target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-instagram ig"></i>
-          </a>
+            <!-- Instagram -->
+            <a class="btn text-white m-1 social-icon"
+               [href]="contact.igLink"
+               target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-instagram ig"></i>
+            </a>
+          </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </section>
-  <section class="mx-5 text-center">
-    <h1>Sponzoři</h1>
-    <div class="card-group d-flex flex-row my-5">
-      <div class="user-card mx-auto" *ngFor="let sponsor of sponsors">
-        <img class="card-img-top m-2" [src]="getImgSponsor(sponsor)" alt="user image">
-        <div class="card-body">
-          <h5 class="card-title text-center mt-2">{{sponsor.name}}</h5>
+  <section class="text-center bg-light">
+    <div class="container-md container-fluid px-md-5 py-5 ">
+      <h1 class="text-center mb-5 text-dark">Sponzoři</h1>
+      <div class="card-group d-flex flex-row my-5 ">
+        <div class="user-card mx-auto bg-white" *ngFor="let sponsor of sponsors">
+          <img class="card-img-top m-2" [src]="getImgSponsor(sponsor)" alt="user image">
+          <div class="card-body">
+            <h5 class="card-title text-center mt-2">{{sponsor.name}}</h5>
+          </div>
         </div>
       </div>
     </div>
