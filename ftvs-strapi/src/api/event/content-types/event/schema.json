@@ -48,9 +48,6 @@
     "startDate": {
       "type": "datetime"
     },
-    "endDate": {
-      "type": "datetime"
-    },
     "organizers": {
       "type": "relation",
       "relation": "manyToMany",
@@ -63,6 +60,9 @@
         "nase",
         "cizi"
       ]
+    },
+    "place": {
+      "type": "string"
     }
   }
 }

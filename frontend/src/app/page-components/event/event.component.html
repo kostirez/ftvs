@@ -17,7 +17,9 @@
       </section>
       <section class="row mt-5 px-2 px-md-0">
         <div class="col mt-md-5 d-flex flex-column align-items-center align-items-md-start overflow-scroll">
-          <p class="text-dark">{{event.description}}</p>
+          <markdown>
+            {{event.description}}
+          </markdown>
         </div>
       </section>
       <section *ngIf="photos$ | async as photos"
@@ -64,6 +66,7 @@
        *ngIf="applicationStep===2">
     <h1>{{event.name}}</h1>
     <h5>{{event.startDate | date}}</h5>
+    <h5>{{event.place}}</h5>
     <h5>opravdu se chcete prihlasit</h5>
     <h3>cena: {{event.price}}</h3>
     <h4>{{name}}</h4>
