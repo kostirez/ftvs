@@ -1,15 +1,16 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from "./strapi-services/auth.service";
 import { User } from "./strapi-model/user";
 import { AboutService, Contact } from "./strapi-services/about.service";
 import { Subscription } from "rxjs";
+import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent implements OnInit, OnDestroy{
   title = 'frontend';
 
   user: User | null = null;
@@ -21,7 +22,8 @@ export class AppComponent implements OnDestroy{
   subs: Subscription[] = []
 
   constructor(private authService: AuthService,
-              private aboutService: AboutService) {
+              private aboutService: AboutService,
+              private router: Router) {
     this.subs.push(
       this.authService.user$.subscribe(user => this.user = user));
     this.subs.push(
@@ -41,4 +43,14 @@ export class AppComponent implements OnDestroy{
   ngOnDestroy(): void {
     this.subs.forEach(s => s.unsubscribe());
   }
+
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Scroll to the top of the page
+        document.scrollingElement!.scrollTo(0, 0);
+      }
+    });
+  }
 }
+

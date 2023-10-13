@@ -3,9 +3,11 @@
     <section class="mb-5 py-3">
       <img class="mw-100" src="/assets/logo.png" alt="image">
       <h2 class="mb-5 text-primary">Jsme univerzitní studentský spolek Univerzity Karlovy.</h2>
-      <button type="button" class="btn btn-primary btn-lg px-5 py-3">
-        <a class="nav-link" routerLink="/login">Pridej se k nam</a>
-      </button>
+      <a class="nav-link" routerLink="/login">
+        <button type="button" class="btn btn-primary btn-lg px-5 py-3">
+          Pridej se k nam
+        </button>
+      </a>
     </section>
   </div>
 </div>
@@ -18,7 +20,7 @@
         <div>
           <img class="w-100 img-fluid" [src]="item.pic" alt="image">
           <h2 class="m-5 text-center text-primary">{{item.headline}}</h2>
-          <i class="conner-icon bi " [ngClass]="item.className" ></i>
+          <i class="conner-icon bi " [ngClass]="item.className"></i>
         </div>
       </a>
     </div>
@@ -36,9 +38,11 @@
       <h2 class="m-4 text-primary">Jak se stát členem spolku?</h2>
       <h4>1) Zaregistrujte se na našich stránkách</h4>
       <h4>2) Zaplať registrační poplatek</h4>
-      <button type="button" class="btn btn-primary btn-lg mt-3 px-5 py-3 text-light">
-        <a class="nav-link" routerLink="/login">Registrace</a>
-      </button>
+      <a class="nav-link" routerLink="/login">
+        <button type="button" class="btn btn-primary btn-lg mt-3 px-5 py-3 text-light">
+          Registrace
+        </button>
+      </a>
       <h6 class="m-3">Členství vzniká zaplacením členského příspěvku, který musí být zaplacen nejpozději do 30 dní od
         odeslání
         přihlášky (a dále se platí do 31. října na následující akademický rok). Členství zaniká nezaplacením členského
