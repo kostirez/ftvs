@@ -13,6 +13,7 @@ import { EventsComponent } from './page-components/events/events.component';
 import { AboutComponent } from './page-components/about/about.component';
 import { GalleryComponent } from './page-components/gallery/gallery.component';
 import { DocumentsComponent } from './page-components/documents/documents.component';
+import { FilterEventsPipe } from "./pipes/event.pipe";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DocumentsComponent } from './page-components/documents/documents.compon
     EventsComponent,
     AboutComponent,
     GalleryComponent,
-    DocumentsComponent
+    DocumentsComponent,
+    FilterEventsPipe,
   ],
   imports: [
     BrowserModule,

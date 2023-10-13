@@ -27,27 +27,25 @@
 <div *ngIf="events"
      class="container-md my-5 ">
   <div class="d-flex flex-column flex-md-row">
-    <div class="col-md-4"
-         *ngFor="let event of events">
-      <ng-container *ngIf="shouldBeDispley(event)">
-        <div class="event-box"
-             (click)="navigateToEvent(event.id)"
-             role="button">
-          <img [src]="getImg(event)" class="w-100 img-fluid mb-3" alt="...">
-          <div class="container m-4">
-            <div class="row">
-              <h2 class="col text-primary">{{event.name}}</h2>
-            </div>
-            <div class="row">
-              <h5 class="col text-dark">{{event.startDate | date}}</h5>
-            </div>
-            <div class="row">
-              <h5 class="col text-dark">{{event.startDate | date}}</h5>
-              <h3 class="col text-primary text-center">{{event.price}}</h3>
-            </div>
+    <div class="col-md-6 col-lg-4"
+         *ngFor="let event of events | filterEvents: currentTimeCategory.month.num: currentCategory.category">
+      <div class="event-box mx-md-2"
+           (click)="navigateToEvent(event.id)"
+           role="button">
+        <img [src]="getImg(event)" class="w-100 img-fluid mb-3" alt="...">
+        <div class="container m-4">
+          <div class="row">
+            <h2 class="col text-primary">{{event.name}}</h2>
+          </div>
+          <div class="row">
+            <h5 class="col text-dark">{{event.startDate | date}}</h5>
+          </div>
+          <div class="row">
+            <h5 class="col text-dark">{{event.startDate | date}}</h5>
+            <h3 class="col text-primary text-center">{{event.price}}</h3>
           </div>
         </div>
-      </ng-container>
+      </div>
     </div>
   </div>
 </div>
