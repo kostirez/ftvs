@@ -7,26 +7,30 @@ interface HomeItem {
   btnText: string;
   link: string;
   pic: string;
+  className: string;
 }
 
 const HOME_ITEMS: HomeItem[] = [
   {
-    headline: "Nase akce",
+    headline: "Akce",
     btnText: "vsechny akce",
     link: "/events",
     pic: "./assets/akce_mia.jpeg",
+    className: "bi-calendar3",
   },
   {
     headline: "Kdo jsem",
     btnText: "vice info",
     link: "/about",
     pic: "./assets/akce_mia.jpeg",
+    className: "bi-info-circle",
   },
   {
-    headline: "Fotky",
+    headline: "Galerie",
     btnText: "galerie",
     link: "/gallery",
     pic: "./assets/akce_mia.jpeg",
+    className: "bi-file-image",
   },
 ]
 

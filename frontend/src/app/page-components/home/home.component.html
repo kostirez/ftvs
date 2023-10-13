@@ -1,19 +1,48 @@
-<div class="text-center">
-  <img class="mw-100" src="/assets/logo.png" alt="image">
-  <h3>Jsme univerzitní studentský spolek Univerzity Karlovy.</h3>
-  <button type="button" class="btn btn-primary btn-lg">
-    <a class="nav-link" routerLink="/login">Pridej se k nam</a>
-  </button>
-</div>
-<div class="container-md container-fluid my-5">
-  <div class="row">
-    <section class="col-md-4 home-item"
-    *ngFor="let item of items">
-      <h3>{{item.headline}}</h3>
-      <img [src]="item.pic" alt="image">
-      <button type="button" class="btn btn-primary btn-lg">
-        <a class="nav-link" [routerLink]="item.link">{{item.btnText}}</a>
+<div class="py-5">
+  <div class="container-md container-fluid text-center bg-white">
+    <section class="mb-5 py-3">
+      <img class="mw-100" src="/assets/logo.png" alt="image">
+      <h2 class="mb-5 text-primary">Jsme univerzitní studentský spolek Univerzity Karlovy.</h2>
+      <button type="button" class="btn btn-primary btn-lg px-5 py-3">
+        <a class="nav-link" routerLink="/login">Pridej se k nam</a>
       </button>
+    </section>
+  </div>
+</div>
+<div class="bg-dark">
+  <div class="container-md container-fluid py-5 ">
+    <div class="d-flex flex-column flex-md-row">
+      <a class="link-card flex-fill my-5 mx-5 text-decoration-none bg-light"
+         *ngFor="let item of items"
+         [routerLink]="item.link">
+        <div>
+          <img class="w-100 img-fluid" [src]="item.pic" alt="image">
+          <h2 class="m-5 text-center text-primary">{{item.headline}}</h2>
+          <i class="conner-icon bi " [ngClass]="item.className" ></i>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="bg-light">
+  <div class="container-md container-fluid text-center py-5">
+    <section class="m-5 py-3">
+      <h2 class="m-4 text-primary">Proč se stát členem?</h2>
+      <h4>Ve spolku uvítáme každého, kdo se bude chtít stát součástí UK rodiny, setkávat se s ostatními studenty nebo
+        vyučujícími, získat užitečné a praktické informace a také si užít spoustu zábavy.</h4>
+      <h4>Členem MII se může stát jakýkoli student Univerzity Karlovy. </h4>
+    </section>
+    <section class="m-5 py-3">
+      <h2 class="m-4 text-primary">Jak se stát členem spolku?</h2>
+      <h4>1) Zaregistrujte se na našich stránkách</h4>
+      <h4>2) Zaplať registrační poplatek</h4>
+      <button type="button" class="btn btn-primary btn-lg mt-3 px-5 py-3 text-light">
+        <a class="nav-link" routerLink="/login">Registrace</a>
+      </button>
+      <h6 class="m-3">Členství vzniká zaplacením členského příspěvku, který musí být zaplacen nejpozději do 30 dní od
+        odeslání
+        přihlášky (a dále se platí do 31. října na následující akademický rok). Členství zaniká nezaplacením členského
+        příspěvku.</h6>
     </section>
   </div>
 </div>

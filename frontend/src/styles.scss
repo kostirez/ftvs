@@ -4,14 +4,15 @@
 @import "../node_modules/bootstrap/scss/variables";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-$primary:       $red-600;
+$primary:       #C70039;
 $secondary:     $yellow-300;
 $success:       $green;
 $info:          $cyan;
 $warning:       $yellow;
 $danger:        $red;
-$light:         $gray-600;
-$dark:          $gray-900;
+$light:         #e6d0c9;
+$medium:        #FF6969;
+$dark:          #141E46;
 
 //futhermore it's necesary override the $theme-colors
 
@@ -23,6 +24,7 @@ $theme-colors: (
   "warning":    $warning,
   "danger":     $danger,
   "light":      $light,
+  "medium":     $medium,
   "dark":       $dark
 );
 
@@ -32,7 +34,7 @@ $theme-colors: (
 
 .social-icon {
   font-size: 30px;
-  background-color: #cbcecb;
+  background-color: $light;
   .fb {
     color: #1877f2;
   }
