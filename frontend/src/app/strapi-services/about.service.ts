@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
 import { StrapiService } from "../core/strapi.service";
 import { Observable } from "rxjs";
-import { User } from "../strapi-model/user";
-import { map } from "rxjs/operators";
+import { Member } from "../strapi-model/user";
 
 export interface AboutPageData {
   main: string;
-  people: User[];
 }
 
 export interface Contact {
@@ -31,21 +29,7 @@ export class AboutService {
 
   getAbout(): Observable<AboutPageData> {
 
-    return this.strapi.getSingleType<AboutPageData>("about-page", { "populate[people][populate]": "avatar"})
-      .pipe(
-        map(data => (
-          {
-            ...data,
-            people: data.people.map(
-              u => ({
-                ...u,
-                // @ts-ignore
-                avatar: u.avatar.data.attributes
-              })
-            )
-          }
-      ))
-      )
+    return this.strapi.getSingleType<AboutPageData>("about-page", { })
   }
 
   getContacts(): Observable<Contact> {
@@ -54,5 +38,9 @@ export class AboutService {
 
   getAboutMembership(): Observable<AboutMembership> {
     return this.strapi.getSingleType<AboutMembership>("about-membership", {});
+  }
+
+  getMembers(): Observable<Member[]> {
+    return this.strapi.getMany<Member>("members", {populate: "*"});
   }
 }

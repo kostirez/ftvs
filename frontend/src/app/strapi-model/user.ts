@@ -18,3 +18,10 @@ export interface AuthUser {
   jwt: string;
   user: User;
 }
+
+export interface Member {
+  name: string;
+  title: string;
+  picture: Img;
+  email: string;
+}

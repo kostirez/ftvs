@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AboutPageData, AboutService, Contact } from "../../strapi-services/about.service";
 import { Observable, Subscription } from "rxjs";
 import { UserService } from "../../strapi-services/user.service";
-import {  User } from "../../strapi-model/user";
+import { Member, User } from "../../strapi-model/user";
 import { ImageService } from "../../core/image.service";
 import { Sponsor, SponsorService } from "../../strapi-services/sponsor.service";
 
@@ -16,6 +16,7 @@ export class AboutComponent implements OnInit, OnDestroy {
   data$: Observable<AboutPageData> | null;
 
   sponsors: Sponsor[] = [];
+  members: Member[] = [];
 
   contact: Contact | null = null;
 
@@ -33,6 +34,8 @@ export class AboutComponent implements OnInit, OnDestroy {
       this.sponsorService.getMany().subscribe(s => this.sponsors = s));
     this.subs.push(
       this.aboutService.getContacts().subscribe(c => this.contact = c));
+    this.subs.push(
+      this.aboutService.getMembers().subscribe(m => this.members = m));
 
   }
 
@@ -40,6 +43,14 @@ export class AboutComponent implements OnInit, OnDestroy {
     if (user.avatar) {
       return "url" in user.avatar ?
         this.imageService.getImgUrl(user.avatar.url) : "";
+    }
+    return "";
+  }
+
+  public getMemberImg(m: Member): string {
+    if (m.picture) {
+      return "url" in m.picture ?
+        this.imageService.getImgUrl(m.picture.url) : "";
     }
     return "";
   }

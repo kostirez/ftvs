@@ -8,13 +8,13 @@
   <section class="text-center bg-dark">
     <div class="container-md container-fluid px-md-5 py-5">
       <h1 class="text-center mb-5 text-white">Kdo to tu vede</h1>
-      <div class="card-group d-flex flex-row my-5">
-        <div class="user-card mx-auto bg-light" *ngFor="let user of data.people">
-          <img class="card-img-top m-2" [src]="getImg(user)" alt="user image">
+      <div class="card-group d-flex flex-wrap my-5">
+        <div class="user-card mx-auto bg-light my-3" *ngFor="let member of members">
+          <img class="card-img-top m-2" [src]="getMemberImg(member)" alt="user image">
           <div class="card-body">
-            <h3 class="card-title text-center mt-2 text-primary">{{user.username}}</h3>
-            <p class="card-text text-center mt-2 text-dark">{{user.description}}</p>
-            <p class="card-text text-center mt-2 text-dark">{{user.email}}</p>
+            <h2 class="card-title text-center mt-2 text-primary">{{member.name}}</h2>
+            <h5 class="card-text text-center mt-2 text-dark">{{member.title}}</h5>
+            <h5 class="card-text text-center mt-2 text-dark">{{member.email}}</h5>
           </div>
         </div>
       </div>
@@ -57,8 +57,8 @@
   <section class="text-center bg-light">
     <div class="container-md container-fluid px-md-5 py-5 ">
       <h1 class="text-center mb-5 text-dark">Sponzoři</h1>
-      <div class="card-group d-flex flex-row my-5 ">
-        <div class="user-card mx-auto bg-white" *ngFor="let sponsor of sponsors">
+      <div class="card-group d-flex flex-wrap my-5 ">
+        <div class="user-card mx-auto bg-white my-3" *ngFor="let sponsor of sponsors">
           <img class="card-img-top m-2" [src]="getImgSponsor(sponsor)" alt="user image">
           <div class="card-body">
             <h5 class="card-title text-center mt-2">{{sponsor.name}}</h5>

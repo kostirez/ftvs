@@ -14,11 +14,6 @@
   "attributes": {
     "main": {
       "type": "richtext"
-    },
-    "people": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::users-permissions.user"
     }
   }
 }
