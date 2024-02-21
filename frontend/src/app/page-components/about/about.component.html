@@ -1,11 +1,12 @@
 <h1 class="text-center m-5 text-dark">O nás</h1>
 <div *ngIf="data$ | async as data">
-  <section class="my-5 text-center">
+  <section class="my-5 text-center h-screen">
     <div class="container-md container-fluid">
+      <h1 class="text-center mb-5 text-dark">Kdo jsme</h1>
       <h3 class="mt-5 text-dark">{{data.main}}</h3>
     </div>
   </section>
-  <section class="text-center bg-dark">
+  <section class="text-center bg-dark h-screen">
     <div class="container-md container-fluid px-md-5 py-5">
       <h1 class="text-center mb-5 text-white">Kdo to tu vede</h1>
       <div class="card-group d-flex flex-wrap my-5">
@@ -20,7 +21,7 @@
       </div>
     </div>
   </section>
-  <section class="text-center bg-white">
+  <section class="text-center bg-white h-screen">
     <div class="container-md container-fluid px-md-5 py-5 ">
       <h1 class="text-center mb-5 text-dark">Kontakt</h1>
       <ng-container *ngIf="contact">
@@ -54,7 +55,7 @@
       </ng-container>
     </div>
   </section>
-  <section class="text-center bg-light">
+  <section class="text-center bg-light h-screen">
     <div class="container-md container-fluid px-md-5 py-5 ">
       <h1 class="text-center mb-5 text-dark">Sponzoři</h1>
       <div class="card-group d-flex flex-wrap my-5 ">

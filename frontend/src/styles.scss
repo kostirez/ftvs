@@ -43,3 +43,28 @@ $theme-colors: (
     color: #9f0598;
   }
 }
+@media only screen and (max-width: 415px) {
+  .h-screen {
+    height: auto;
+  }
+  .h-50-screen {
+    height: auto;
+  }
+
+}
+@media only screen and (min-width: 800px) {
+  .h-screen {
+    height: 100vh;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .h-50-screen {
+    height: 70vh;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
