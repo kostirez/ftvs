@@ -4,17 +4,8 @@
 @import "../node_modules/bootstrap/scss/variables";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-$primary:       #C70039;
-$secondary:     #FF6969;
-$success:       $green;
-$info:          #d0ea8d;
-$warning:       $yellow;
-$danger:        $red;
-$light:         #e6d0c9;
-$medium:        #FF6969;
-$dark:          #141E46;
-
-//futhermore it's necesary override the $theme-colors
+@import "colors";
+  //futhermore it's necesary override the $theme-colors
 
 $theme-colors: (
   "primary":    $primary,
