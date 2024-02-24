@@ -25,7 +25,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="events"
+<div *ngIf="events.length !== 0 else noEvents"
      class="container-md my-5 ">
   <div class="d-flex flex-column flex-md-row">
     <div class="col-md-6 col-lg-4"
@@ -50,3 +50,8 @@
     </div>
   </div>
 </div>
+<ng-template #noEvents>
+  <div class="text-center text-warning w-100 mt-5 pt-5">
+    <h4>žádné akce ve vybraný měsíc</h4>
+  </div>
+</ng-template>

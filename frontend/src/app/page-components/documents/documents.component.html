@@ -1,6 +1,6 @@
 <section class="m-5 text-center">
   <h1 class="text-dark">Dokumenty ke stažení</h1>
-  <ng-container *ngIf="documents">
+  <ng-container *ngIf="documents.length!==0 else noDocuments">
     <div class="d-flex align-content-start flex-wrap my-3 my-md-5">
       <div *ngFor="let doc of documents"
            class="doc-box my-3"
@@ -11,3 +11,8 @@
     </div>
   </ng-container>
 </section>
+<ng-template #noDocuments>
+  <div class="text-center text-warning w-100 mt-5 pt-5">
+    <h4>žádné dokumenty nenalezeny</h4>
+  </div>
+</ng-template>

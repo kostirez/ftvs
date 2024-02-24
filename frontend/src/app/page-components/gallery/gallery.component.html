@@ -1,11 +1,17 @@
 <div>
   <h1 class="text-center m-5 text-dark">Galerie</h1>
-  <div *ngIf="photos$ | async as photos" class="container">
+  <div *ngIf="photos$ | async as photos else loading" class="container">
     <div class="d-flex align-content-start flex-wrap my-3 my-md-5">
       <div class="photo-box" *ngFor="let photo of photos">
         <img class=" img-thumbnail" [src]="getImg(photo)" alt="image">
         <h4 class="text-center text-dark m-auto p-3">{{photo.description}}</h4>
       </div>
+      <div class="text-center text-warning w-100 mt-5" *ngIf="photos.length === 0">
+        <h4>Zatím tu nejsou žádné fotky</h4>
+      </div>
     </div>
   </div>
+  <ng-template #loading>
+    <h5>načítání</h5>
+  </ng-template>
 </div>
