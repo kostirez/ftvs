@@ -94,6 +94,12 @@
     },
     "organizer": {
       "type": "boolean"
+    },
+    "isic": {
+      "type": "biginteger"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }
