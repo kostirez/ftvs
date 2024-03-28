@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { environment } from "../../environments/environment";
+
+const URL = environment.STRAPI_URL;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
 
-  private base = "http://localhost:1337"
+  private base = URL;
 
   constructor() { }
 
